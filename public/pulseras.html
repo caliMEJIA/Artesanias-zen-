@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="./auth/css/pulseras.css">
+</head>
+<body>
+
+    <h1>Nuestros Productos</h1>
+    <div class="contenedor">
+        <div class="producto">
+            <img src="./image/descarga.jpg" alt="Producto 1">
+            <div class="precio">$10.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (1).jpg" alt="Producto 2">
+            <div class="precio">$15.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (2).jpg" alt="Producto 3">
+            <div class="precio">$12.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (3).jpg" alt="Producto 4">
+            <div class="precio">$18.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (4).jpg" alt="Producto 5">
+            <div class="precio">$20.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (5).jpg" alt="Producto 6">
+            <div class="precio">$8.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="producto">
+            <img src="./image/descarga (6).jpg" alt="Producto 7">
+            <div class="precio">$25.000</div>
+            <div class="botones">
+                <button class="comprar">Comprar</button>
+                <button class="carrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL LOGIN/REGISTRO/OLVIDO -->
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal-content" id="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <!-- Aquí se insertará el formulario correspondiente -->
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="contactenos.html">Contáctanos</a>
+            <a href="#">Centro de ayudas</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Vende con nosotros</a>
+        </div>
+        <div class="footer-social">
+            <a href="#" title="Instagram">&#x1F4F7;</a>
+            <a href="#" title="Facebook">&#x1F426;</a>
+            <a href="#" title="WhatsApp">&#x1F4F2;</a>
+        </div>
+        &copy; 2024 Artesanías Zenú. Todos los derechos reservados.
+    </footer>
+    <script>
+    // MODAL LOGIN/REGISTRO/OLVIDO
+    const loginForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Hola de nuevo</h3>
+        <p>Bienvenido</p>
+        <input type='text' placeholder='Ingresar tu usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña'>
+        <a href='backend/dasboard.html'>
+          <button type='button' class='btn_ingresar'>Ingresar</button>
+        </a>
+        <p>
+          <a href='#' id='modal-registro-link'>Registrarse</a> |
+          <a href='#' id='modal-olvido-link'>¿Olvidaste tu contraseña?</a>
+        </p>
+      </div>
+      <div class='conten_izquierdo'>
+        <h2>Artesanos tejiendo para crecer</h2>
+      </div>
+    </div>`;
+    const registroForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Registro</h3>
+        <p>¡Crea tu cuenta!</p>
+        <input type='text' placeholder='Ingresar tu usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña'>
+        <input type='number' placeholder='Ingresa tu número'>
+        <button type='button' class='btn_ingresar'>Registrarse</button>
+      </div>
+      <div class='conten_izquierdo'>
+        <img src='#' alt='logo proyecto'>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+      </div>
+    </div>`;
+    const olvidoForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Recuperar contraseña</h3>
+        <p>Escribe tu correo</p>
+        <input type='email' placeholder='Ingresa tu email'>
+        <button type='button' class='btn_ingresar'>Enviar</button>
+      </div>
+      <div class='conten_izquierdo'>
+        <img src='#' alt='logo proyecto'>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+      </div>
+    </div>`;
+    const modalBg = document.getElementById('modal-bg');
+    const modalContent = document.getElementById('modal-content');
+    const modalClose = document.getElementById('modal-close');
+    function openModal(content) {
+      modalContent.innerHTML = `<button class='modal-close' id='modal-close'>&times;</button>` + content;
+      modalBg.classList.add('active');
+      setTimeout(() => {
+        document.getElementById('modal-close').onclick = closeModal;
+        const reg = document.getElementById('modal-registro-link');
+        if(reg) reg.onclick = (e) => { e.preventDefault(); openModal(registroForm); };
+        const olv = document.getElementById('modal-olvido-link');
+        if(olv) olv.onclick = (e) => { e.preventDefault(); openModal(olvidoForm); };
+      }, 10);
+    }
+    function closeModal() {
+      modalBg.classList.remove('active');
+      setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+    }
+    document.getElementById('btn-cuenta').onclick = (e) => { e.preventDefault(); openModal(loginForm); };
+    // Cerrar modal al hacer click fuera del contenido
+    modalBg.onclick = function(e) {
+      if(e.target === modalBg) closeModal();
+    };
+    modalClose.onclick = closeModal;
+    // CARRITO (funcionalidad básica)
+    let carrito = [];
+    function agregarCarrito(producto) {
+        carrito.push(producto);
+        document.getElementById('carrito-badge').textContent = carrito.length;
+        alert('Producto agregado: ' + producto);
+    }
+    document.getElementById('btn-carrito').onclick = function() {
+        if(carrito.length === 0) {
+            alert('No tienes productos en tu carrito');
+        } else {
+            alert('Productos en tu carrito:\n' + carrito.join('\n'));
+        }
+    };
+    // Notificaciones (simulado)
+    document.getElementById('btn-notificaciones').onclick = function() {
+        alert('No tienes notificaciones nuevas.');
+    };
+    </script>
+</body>
+</html>
+            <a href="/Artesanias Zenú/index.html"a>
+</section>
+
+</body>
+</html>

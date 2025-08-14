@@ -1,0 +1,130 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #864b13;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Navegación */
+nav {
+    background-color: #eaeaea;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #864b13;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #864b13;
+}
+
+/* Contenido principal */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+/* Secciones */
+section {
+    padding: 2rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+h2 {
+    color: #864b13;
+    border-bottom: 2px solid #864b13;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Detalles de preguntas */
+details {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f2f8ff;
+    border-left: 4px solid #864b13;
+    border-radius: 4px;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+
+details p {
+    margin-top: 0.5rem;
+}
+
+/* Listas */
+ul {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Enlaces */
+a {
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #864b13;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
