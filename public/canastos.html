@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./auth/css/canastos.css">
+    <title>Artesanías Zenú - Tienda Virtual</title>
+</head>
+<body>
+    <!-- HEADER SUPERIOR -->
+    <div class="header-top">
+        <div class="header-container">
+            <div class="logo">Artesanías Zenú <span>• Tienda Virtual</span></div>
+            <form class="search-bar" onsubmit="event.preventDefault(); alert('Búsqueda: ' + this.query.value);">
+                <input type="text" name="query" placeholder="Buscar productos, categorías..." autocomplete="off">
+                <button type="submit">🔍</button>
+            </form>
+            <div class="header-actions">
+                <button class="header-action" id="btn-notificaciones" title="Notificaciones">🔔</button>
+                <button class="header-action" id="btn-cuenta" title="Mi cuenta">👤</button>
+                <button class="header-action" id="btn-carrito" title="Carrito">
+                    🛒<span class="badge" id="carrito-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- MENÚ DE CATEGORÍAS -->
+    <nav class="menu-categorias">
+        <div class="categorias-container">
+            <a href="#" class="categoria-link active">Inicio</a>
+            <a href="#" class="categoria-link">Canastos</a>
+            <a href="#" class="categoria-link">Mochilas</a>
+            <a href="#" class="categoria-link">Sombreros</a>
+            <a href="#" class="categoria-link">Pulseras</a>
+            <a href="#" class="categoria-link">Decoración</a>
+            <a href="#" class="categoria-link">Ofertas</a>
+            <a href="#" class="categoria-link">Más...</a>
+        </div>
+    </nav>
+    <!-- BANNER PRINCIPAL -->
+    <section class="banner">
+        <div class="banner-text">
+            <h2>¡Bienvenido a Artesanías Zenú!</h2>
+            <p>Descubre la riqueza cultural y la belleza de nuestras artesanías hechas a mano. Apoya el arte local y lleva a casa piezas únicas llenas de historia.</p>
+        </div>
+        <div class="banner-img">🧺</div>
+    </section>
+    <!-- BENEFICIOS -->
+    <section class="beneficios">
+        <div class="beneficio">
+            <span class="beneficio-icono">🛡️</span>
+            <span class="beneficio-texto">Compras seguras</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🏆</span>
+            <span class="beneficio-texto">Artesanía premiada</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">💳</span>
+            <span class="beneficio-texto">Paga en línea o en efectivo</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🚚</span>
+            <span class="beneficio-texto">Envíos a todo el país</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🎁</span>
+            <span class="beneficio-texto">Promociones y descuentos</span>
+        </div>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canastos Zenú</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #fff8f0;
+            color: #333;
+        }
+        header {
+            background-color: #c76227;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .producto {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .producto img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .producto h2 {
+            font-size: 1.4rem;
+            margin: 0;
+            padding: 1rem;
+            background-color: #c76227;
+            color: white;
+        }
+        .producto p {
+            padding: 1rem;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        footer {
+            background-color: #c76227;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Canastos Zenú</h1>
+        <p>Artesanías únicas hechas a mano por comunidades indígenas Zenú</p>
+    </header>
+
+    <main>
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Panera zenu.jpg" alt="Panera">
+            <h2>Panera</h2>
+            <p>Canasto tejido con caña flecha, una fibra natural utilizada por la cultura Zenú para elaborar sus artesanías.</p>
+        </div>
+
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Canasto sin Tapa.jpg" alt="Canasto sin Tapa">
+            <h2>Canasto sin Tapa</h2>
+            <p>Canasto tejido a mano, elaborado con hojas de milpesos, tejido en espiral, se utiliza principalmente para transportar frutas y alimentos.</p>
+        </div>
+
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Canasto Tapa Café.jpg" alt="Canasto Tapa Café">
+            <h2>Canasto Tapa Café</h2>
+            <p>Canasto artesanal tradicional, elaborado con la técnica del tejido en espiral utilizando fibras de caña flecha. Este tipo de canasto se caracteriza por su tapa.</p>
+        </div>
+
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Contenedor Redondo.jpeg" alt="Canasto Redondo">
+            <h2>Canasto Redondo</h2>
+            <p>Canasto tejid a mano, utilizando la técnica de espiral con fibras de caña flecha, y a menudo decorada con patrones o "pintas" que representan la identidad y cosmovisión Zenú.a.</p>
+        </div>
+
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Canasto Cuadrado.jpg" alt="Canasto Cuadrado">
+            <h2>Canasto Cuadrado</h2>
+            <p>Canasto Artesanal tradicional elaborado con la técnica de tejeduría en caña flecha, que se caracteriza por su forma cuadrada y su uso de patrones o "pintas" que representan elementos de la cultura Zenú.</p>
+        </div>
+
+        <div class="producto">
+            <img src="./Artesanias Zenú/assets/images/Canasto Playero.jpg" alt="Canasto Playero">
+            <h2>Canasto Playero</h2>
+            <p>artesanal elaborada con la técnica tradicional del trenzado en caña flecha, característica de la cultura Zenú en Colombia. Estos canastos, inspirados en el sombrero vueltiao, son elaborados por artesanos que heredan y transmiten las técnicas y diseños ancestrales de su cultura</p>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Canastos Zenú - Todos los derechos reservados
+    </footer>
+
+</body>
+</html>
+    <!-- MODAL LOGIN/REGISTRO/OLVIDO -->
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal-content" id="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <!-- Aquí se insertará el formulario correspondiente -->
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="contactenos.html">Contáctanos</a>
+            <a href="#">Centro de ayudas</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Vende con nosotros</a>
+        </div>
+        <div class="footer-social">
+            <a href="#" title="Instagram">&#x1F4F7;</a>
+            <a href="#" title="Facebook">&#x1F426;</a>
+            <a href="#" title="WhatsApp">&#x1F4F2;</a>
+        </div>
+        &copy; 2024 Artesanías Zenú. Todos los derechos reservados.
+    </footer>
+    <script>
+    // MODAL LOGIN/REGISTRO/OLVIDO
+    const loginForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Hola de nuevo</h3>
+        <p>Bienvenido</p>
+        <input type='text' placeholder='Ingresar tu usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña'>
+        <a href='backend/dasboard.html'>
+          <button type='button' class='btn_ingresar'>Ingresar</button>
+        </a>
+        <p>
+          <a href='#' id='modal-registro-link'>Registrarse</a> |
+          <a href='#' id='modal-olvido-link'>¿Olvidaste tu contraseña?</a>
+        </p>
+      </div>
+      <div class='conten_izquierdo'>
+        <h2>Artesanos tejiendo para crecer</h2>
+      </div>
+    </div>`;
+    const registroForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Registro</h3>
+        <p>¡Crea tu cuenta!</p>
+        <input type='text' placeholder='Ingresar tu usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña'>
+        <input type='number' placeholder='Ingresa tu número'>
+        <button type='button' class='btn_ingresar'>Registrarse</button>
+      </div>
+      <div class='conten_izquierdo'>
+        <img src='#' alt='logo proyecto'>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+      </div>
+    </div>`;
+    const olvidoForm = `
+    <div class='conten_gen'>
+      <div class='tex'>
+        <h3>Recuperar contraseña</h3>
+        <p>Escribe tu correo</p>
+        <input type='email' placeholder='Ingresa tu email'>
+        <button type='button' class='btn_ingresar'>Enviar</button>
+      </div>
+      <div class='conten_izquierdo'>
+        <img src='#' alt='logo proyecto'>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+      </div>
+    </div>`;
+    const modalBg = document.getElementById('modal-bg');
+    const modalContent = document.getElementById('modal-content');
+    const modalClose = document.getElementById('modal-close');
+    function openModal(content) {
+      modalContent.innerHTML = `<button class='modal-close' id='modal-close'>&times;</button>` + content;
+      modalBg.classList.add('active');
+      setTimeout(() => {
+        document.getElementById('modal-close').onclick = closeModal;
+        const reg = document.getElementById('modal-registro-link');
+        if(reg) reg.onclick = (e) => { e.preventDefault(); openModal(registroForm); };
+        const olv = document.getElementById('modal-olvido-link');
+        if(olv) olv.onclick = (e) => { e.preventDefault(); openModal(olvidoForm); };
+      }, 10);
+    }
+    function closeModal() {
+      modalBg.classList.remove('active');
+      setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+    }
+    document.getElementById('btn-cuenta').onclick = (e) => { e.preventDefault(); openModal(loginForm); };
+    // Cerrar modal al hacer click fuera del contenido
+    modalBg.onclick = function(e) {
+      if(e.target === modalBg) closeModal();
+    };
+    modalClose.onclick = closeModal;
+    // CARRITO (funcionalidad básica)
+    let carrito = [];
+    function agregarCarrito(producto) {
+        carrito.push(producto);
+        document.getElementById('carrito-badge').textContent = carrito.length;
+        alert('Producto agregado: ' + producto);
+    }
+    document.getElementById('btn-carrito').onclick = function() {
+        if(carrito.length === 0) {
+            alert('No tienes productos en tu carrito');
+        } else {
+            alert('Productos en tu carrito:\n' + carrito.join('\n'));
+        }
+    };
+    // Notificaciones (simulado)
+    document.getElementById('btn-notificaciones').onclick = function() {
+        alert('No tienes notificaciones nuevas.');
+    };
+    </script>
+</body>
+</html>
