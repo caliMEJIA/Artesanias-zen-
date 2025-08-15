@@ -1,5 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>   
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artesanías Zenú - Tienda Virtual</title>
+    <link rel="stylesheet" href="./image/Nuestros artesanos.jpg">
+<!-- HEADER SUPERIOR -->
+    <div class="header-top">
+        <div class="header-container">
+            <div class="logo">Artesanías Zenú <span>• Tienda Virtual</span></div>
+            <form class="search-bar" onsubmit="event.preventDefault(); alert('Búsqueda: ' + this.query.value);">
+                <input type="text" name="query" placeholder="Buscar productos, categorías..." autocomplete="off">
+                <button type="submit">🔍</button>
+            </form>
+            <div class="header-actions">
+                <button class="header-action" id="btn-notificaciones" title="Notificaciones">🔔</button>
+                <button class="header-action" id="btn-cuenta" title="Mi cuenta">👤</button>
+                <button class="header-action" id="btn-carrito" title="Carrito">
+                    🛒<span class="badge" id="carrito-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- MENÚ DE CATEGORÍAS -->
+    <nav class="menu-categorias">
+        <div class="categorias-container">
+            <a href="#" class="categoria-link active">Inicio</a>
+            <a href="#" class="categoria-link">Canastos</a>
+            <a href="#" class="categoria-link">Mochilas</a>
+            <a href="#" class="categoria-link">Sombreros</a>
+            <a href="#" class="categoria-link">Pulseras</a>
+            <a href="#" class="categoria-link">Decoración</a>
+            <a href="#" class="categoria-link">Ofertas</a>
+            <a href="#" class="categoria-link">Más...</a>
+        </div>
+    </nav>
+    <!-- BANNER PRINCIPAL -->
+    <section class="banner">
+        <div class="banner-text">
+            <h2>¡Bienvenido a Artesanías Zenú!</h2>
+            <p>Descubre la riqueza cultural y la belleza de nuestras artesanías hechas a mano. Apoya el arte local y lleva a casa piezas únicas llenas de historia.</p>
+        </div>
+        <div class="banner-img">🧺</div>
+    </section>
+    <!-- BENEFICIOS -->
+    <section class="beneficios">
+        <div class="beneficio">
+            <span class="beneficio-icono">🛡️</span>
+            <span class="beneficio-texto">Compras seguras</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🏆</span>
+            <span class="beneficio-texto">Artesanía premiada</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">💳</span>
+            <span class="beneficio-texto">Paga en línea o en efectivo</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🚚</span>
+            <span class="beneficio-texto">Envíos a todo el país</span>
+        </div>
+        <div class="beneficio">
+            <span class="beneficio-icono">🎁</span>
+            <span class="beneficio-texto">Promociones y descuentos</span>
+        </div>
+    </section>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="UTF-8">
     <title>Centro de Ayuda</title>
