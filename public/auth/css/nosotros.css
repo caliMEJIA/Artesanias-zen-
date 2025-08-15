@@ -14,7 +14,7 @@ body {
 
 h2, h3, h4 {
   margin-bottom: 1rem;
-  color:#c76227/* que evoca naturaleza y sostenibilidad */
+  color:#fffaf7/* que evoca naturaleza y sostenibilidad */
 }
 
 h3 {
@@ -41,7 +41,7 @@ ul li {
 }
 
 a {
-  color: #c76227;
+  color: #e8e8e8;
   text-decoration: none;
 }
 
@@ -149,6 +149,10 @@ a:hover {
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        a{
+            background-color: #c76227;
+            padding: 10px;
         }
         body {
             background-color: var(--gris-fondo);
