@@ -3,8 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./auth/css/canastos.css">
     <title>Artesanías Zenú - Tienda Virtual</title>
+    <style>
+        :root {
+            --marron: #804727;
+            --naranja: #c76227;
+            --naranja-oscuro: #864b13;
+            --verde: #24765d;
+            --gris-fondo: #f8f8f8;
+            --gris-tarjeta: #f4f1ee;
+            --blanco: #fff;
+            --gris-borde: #e0e0e0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--gris-fondo);
+            color: #333;
+        }
+        /* HEADER SUPERIOR */
+        .header-top {
+            background: var(--marron);
+            color: #fff;
+            padding: 10px 0 0 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+        }
+        .logo {
+            font-size: 2.1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--naranja);
+            text-shadow: 1px 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .search-bar {
+            flex: 1;
+            margin: 0 32px;
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--gris-borde);
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-bar button {
+            background: var(--naranja);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 0 6px 6px 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .search-bar button:hover {
+            background: var(--naranja-oscuro);
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .header-action {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-left: 6px;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .header-action:hover {
+            color: var(--naranja);
+        }
+        .header-action .badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--naranja);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+        /* MENÚ DE CATEGORÍAS */
+        .menu-categorias {
+            background: var(--naranja);
+            color: #fff;
+            padding: 0 0 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .categorias-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 0 18px;
+            overflow-x: auto;
+        }
+        .categoria-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 16px 0 14px 0;
+            border-bottom: 2px solid transparent;
+            transition: border 0.2s, color 0.2s;
+            margin-right: 18px;
+            white-space: nowrap;
+        }
+        .categoria-link:hover, .categoria-link.active {
+            border-bottom: 2.5px solid var(--blanco);
+            color: var(--marron);
+        }
+        /* BANNER PRINCIPAL */
+        .banner {
+            background: linear-gradient(120deg, var(--naranja) 60%, var(--marron) 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 260px;
+            margin: 32px auto 0 auto;
+            border-radius: 18px;
+            max-width: 1200px;
+            width: 94%;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+            position: relative;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+        .banner-text {
+            z-index: 2;
+            text-align: left;
+            max-width: 60%;
+        }
+        .banner h2 {
+            font-size: 2.3rem;
+            margin-bottom: 14px;
+            font-weight: 800;
+            text-shadow: 1px 2px 8px rgba(0,0,0,0.10);
+        }
+        .banner p {
+            font-size: 1.18rem;
+            font-weight: 400;
+        }
+        .banner-img {
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.13);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            font-size: 5rem;
+        }
+        /* BENEFICIOS */
+        .beneficios {
+            max-width: 1200px;
+            margin: 32px auto 0 auto;
+            width: 94%;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .beneficio {
+            background: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1 1 180px;
+            min-width: 180px;
+        }
+        .beneficio-icono {
+            font-size: 2rem;
+            color: var(--naranja);
+        }
+        .beneficio-texto {
+            font-size: 1.05rem;
+            color: #333;
+            font-weight: 500;
+        }
+        /* PRODUCTOS DESTACADOS */
+        .productos-destacados {
+            max-width: 1200px;
+            margin: 48px auto 0 auto;
+            width: 94%;
+        }
+        .productos-destacados h3 {
+            color: var(--marron);
+            font-size: 2rem;
+            margin-bottom: 32px;
+            text-align: left;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 36px;
+        }
+        .producto {
+            background-color: var(--blanco);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(199,98,39,0.07);
+            padding: 28px 18px 22px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
+        }
+        .producto:hover {
+            box-shadow: 0 8px 32px rgba(199,98,39,0.18);
+            transform: translateY(-8px) scale(1.03);
+        }
+        .producto-img {
+            width: 120px;
+            height: 120px;
+            background: #f0f2f5;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: var(--naranja);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .producto-nombre {
+            font-size: 1.18rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            text-align: center;
+        }
+        .producto-precio {
+            color: var(--verde);
+            font-size: 1.13rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .btn-comprar {
+            background: linear-gradient(90deg, var(--naranja) 70%, var(--naranja-oscuro) 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px rgba(199,98,39,0.10);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-comprar:hover {
+            background: linear-gradient(90deg, var(--marron) 60%, var(--naranja) 100%);
+            transform: scale(1.07);
+        }
+        /* FOOTER */
+        footer {
+            background-color: var(--marron);
+            color: #fff;
+            text-align: center;
+            padding: 32px 0 18px 0;
+            margin-top: 64px;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 18px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            transition: color 0.2s, opacity 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--naranja);
+            opacity: 1;
+        }
+        .footer-social {
+            margin-bottom: 10px;
+        }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #fff;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .footer-social a:hover {
+            opacity: 1;
+            color: var(--naranja);
+        }
+        @media (max-width: 900px) {
+            .header-container, .categorias-container, .banner, .beneficios, .productos-destacados {
+                max-width: 98vw;
+            }
+            .banner {
+                flex-direction: column;
+                min-height: 180px;
+                padding: 24px 10px;
+            }
+            .banner-text {
+                max-width: 100%;
+                text-align: center;
+            }
+            .banner-img {
+                margin: 18px auto 0 auto;
+            }
+            .beneficios {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+        @media (max-width: 700px) {
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .search-bar {
+                margin: 10px 0;
+                max-width: 98vw;
+            }
+            .categorias-container {
+                gap: 10px;
+                padding: 0 4px;
+            }
+            .productos-grid {
+                gap: 18px;
+            }
+            .producto {
+                min-height: 240px;
+                padding: 18px 6px 16px 6px;
+            }
+        }
+    </style>
+    <style>
+        /* MODAL */
+        .modal-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.35);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .modal-bg.active {
+            display: flex;
+        }
+        .modal-content {
+            background: none;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 340px;
+            max-width: 95vw;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 2rem;
+            color: #804727;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10001;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: #c76227;
+        }
+        .modal-content .conten_gen {
+            margin: 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            max-width: 420px;
+            min-width: 320px;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            .modal-content .conten_gen {
+                flex-direction: column;
+                min-width: 0;
+                max-width: 98vw;
+                padding: 0;
+            }
+            .modal-content .conten_izquierdo {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER SUPERIOR -->
@@ -27,7 +469,7 @@
     <!-- MENÚ DE CATEGORÍAS -->
     <nav class="menu-categorias">
         <div class="categorias-container">
-            <a href="./index.html" class="categoria-link active">Inicio</a>
+            <a href="#" class="categoria-link active">Inicio</a>
             <a href="#" class="categoria-link">Canastos</a>
             <a href="#" class="categoria-link">Mochilas</a>
             <a href="#" class="categoria-link">Sombreros</a>
@@ -81,12 +523,12 @@
             color: #333;
         }
         header {
+            width: 100%;
             background-color: #c76227;
             color: white;
             padding: 2rem;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            width: 100%;
         }
         h1 {
             margin: 0;
@@ -147,37 +589,37 @@
 
     <main>
         <div class="producto">
-            <img src="./image/canastos 1.jpg" alt="Panera">
+            <img src="./image/canastos 3.jpg" alt="Panera">
             <h2>Panera</h2>
             <p>Canasto tejido con caña flecha, una fibra natural utilizada por la cultura Zenú para elaborar sus artesanías.</p>
         </div>
 
         <div class="producto">
-            <img src="./Artesanias Zenú/assets/images/Canasto sin Tapa.jpg" alt="Canasto sin Tapa">
+            <img src="./image/canastos 2.jpg" alt="Canasto sin Tapa">
             <h2>Canasto sin Tapa</h2>
             <p>Canasto tejido a mano, elaborado con hojas de milpesos, tejido en espiral, se utiliza principalmente para transportar frutas y alimentos.</p>
         </div>
 
         <div class="producto">
-            <img src="./Artesanias Zenú/assets/images/Canasto Tapa Café.jpg" alt="Canasto Tapa Café">
+            <img src="./image/canasto 6.jpeg" alt="Canasto Tapa Café">
             <h2>Canasto Tapa Café</h2>
             <p>Canasto artesanal tradicional, elaborado con la técnica del tejido en espiral utilizando fibras de caña flecha. Este tipo de canasto se caracteriza por su tapa.</p>
         </div>
 
         <div class="producto">
-            <img src="./Artesanias Zenú/assets/images/Contenedor Redondo.jpeg" alt="Canasto Redondo">
+            <img src="./image/canastos 3.jpg" alt="Canasto Redondo">
             <h2>Canasto Redondo</h2>
             <p>Canasto tejid a mano, utilizando la técnica de espiral con fibras de caña flecha, y a menudo decorada con patrones o "pintas" que representan la identidad y cosmovisión Zenú.a.</p>
         </div>
 
         <div class="producto">
-            <img src="./Artesanias Zenú/assets/images/Canasto Cuadrado.jpg" alt="Canasto Cuadrado">
+            <img src="./image/Canasto 4.jpg" alt="Canasto Cuadrado">
             <h2>Canasto Cuadrado</h2>
             <p>Canasto Artesanal tradicional elaborado con la técnica de tejeduría en caña flecha, que se caracteriza por su forma cuadrada y su uso de patrones o "pintas" que representan elementos de la cultura Zenú.</p>
         </div>
 
         <div class="producto">
-            <img src="./Artesanias Zenú/assets/images/Canasto Playero.jpg" alt="Canasto Playero">
+            <img src="./image/canasto 5.jpg" alt="Canasto Playero">
             <h2>Canasto Playero</h2>
             <p>artesanal elaborada con la técnica tradicional del trenzado en caña flecha, característica de la cultura Zenú en Colombia. Estos canastos, inspirados en el sombrero vueltiao, son elaborados por artesanos que heredan y transmiten las técnicas y diseños ancestrales de su cultura</p>
         </div>
@@ -199,9 +641,9 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-links">
-            <a href="./Contáctanos.html">Contáctanos</a>
-            <a href="./Contáctanos.html">Centro de ayudas</a>
-            <a href="./Contáctanos.html">Política de privacidad</a>
+            <a href="contactenos.html">Contáctanos</a>
+            <a href="#">Centro de ayudas</a>
+            <a href="#">Política de privacidad</a>
             <a href="#">Términos y condiciones</a>
             <a href="#">Vende con nosotros</a>
         </div>
