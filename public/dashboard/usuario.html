@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Artesanías Zenú</title>
+    <style>
+        :root {
+            --marron: #804727;
+            --naranja: #c76227;
+            --naranja-oscuro: #864b13;
+            --verde: #24765d;
+            --gris-fondo: #f8f8f8;
+            --gris-tarjeta: #f4f1ee;
+            --blanco: #fff;
+            --gris-borde: #e0e0e0;
+            --texto-gris: #666;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--gris-fondo);
+            color: #333;
+        }
+        .header {
+            background: var(--marron);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .header-info p {
+            opacity: 0.9;
+        }
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .btn-header {
+            background: var(--naranja);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-header:hover {
+            background: var(--naranja-oscuro);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background: #fff;
+            color: var(--marron);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .back-btn {
+            background: var(--verde);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #1e5a47;
+        }
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .sidebar {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            height: fit-content;
+            overflow: hidden;
+        }
+        .sidebar-header {
+            background: linear-gradient(135deg, var(--naranja), var(--marron));
+            color: #fff;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .sidebar-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            margin: 0;
+            border-bottom: 1px solid var(--gris-borde);
+        }
+        .sidebar-menu li:last-child {
+            border-bottom: none;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: var(--texto-gris);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+        .sidebar-menu a:hover {
+            background: var(--gris-fondo);
+            color: var(--marron);
+            padding-left: 2rem;
+        }
+        .sidebar-menu a.active {
+            background: var(--naranja);
+            color: #fff;
+            font-weight: 600;
+        }
+        .sidebar-menu a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--marron);
+        }
+        .sidebar-menu a span {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            background: var(--gris-fondo);
+            border-top: 1px solid var(--gris-borde);
+        }
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--texto-gris);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-footer a:hover {
+            background: var(--naranja);
+            color: #fff;
+        }
+        .sidebar-footer a:last-child {
+            margin-bottom: 0;
+        }
+        .sidebar-footer a span {
+            margin-right: 0.75rem;
+            font-size: 1rem;
+        }
+        .main-content {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .section-title {
+            color: var(--marron);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--naranja);
+            padding-bottom: 0.5rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, var(--blanco), var(--gris-fondo));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid var(--gris-borde);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--naranja), var(--marron));
+        }
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--marron);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-label {
+            color: var(--texto-gris);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .stat-trend.positive {
+            color: var(--verde);
+        }
+        .stat-trend.negative {
+            color: #e74c3c;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .product-card {
+            background: var(--blanco);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gris-borde);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--gris-fondo), var(--gris-borde));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--naranja);
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .product-card:hover .product-image::before {
+            transform: translateX(100%);
+        }
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--naranja);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .product-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+        .product-name {
+            font-weight: 700;
+            color: var(--marron);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+        .product-description {
+            color: var(--texto-gris);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        .product-price {
+            color: var(--naranja);
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .product-stars {
+            color: #ffc107;
+            margin-right: 0.5rem;
+        }
+        .product-rating-text {
+            color: var(--texto-gris);
+            font-size: 0.8rem;
+        }
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .order-card {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid var(--gris-borde);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .order-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--naranja), var(--marron));
+        }
+        .order-info {
+            flex: 1;
+        }
+        .order-info h4 {
+            color: var(--marron);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .order-info p {
+            color: var(--texto-gris);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .order-info .order-date {
+            color: var(--naranja);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .order-status {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .order-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .order-status:hover::before {
+            left: 100%;
+        }
+        .status-pending {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            color: #856404;
+            border: 2px solid #ffeaa7;
+        }
+        .status-shipped {
+            background: linear-gradient(135deg, #d1ecf1, #74b9ff);
+            color: #0c5460;
+            border: 2px solid #74b9ff;
+        }
+        .status-delivered {
+            background: linear-gradient(135deg, #d4edda, #00b894);
+            color: #155724;
+            border: 2px solid #00b894;
+        }
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            color: var(--marron);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--gris-borde);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--naranja);
+            box-shadow: 0 0 0 2px rgba(199, 98, 39, 0.2);
+        }
+        .btn {
+            background: var(--naranja);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: var(--naranja-oscuro);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--naranja);
+            border: 2px solid var(--naranja);
+        }
+        .btn-outline:hover {
+            background: var(--naranja);
+            color: #fff;
+        }
+        .artisan-card {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--gris-borde);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .artisan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .artisan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--naranja), var(--marron));
+        }
+        .artisan-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--naranja), var(--marron));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .artisan-avatar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 3px solid var(--gris-borde);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .artisan-card:hover .artisan-avatar::after {
+            opacity: 1;
+        }
+        .artisan-name {
+            font-weight: 700;
+            color: var(--marron);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+        .artisan-specialty {
+            color: var(--texto-gris);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .artisan-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--gris-fondo);
+            border-radius: 10px;
+        }
+        .artisan-stat {
+            text-align: center;
+        }
+        .artisan-stat-number {
+            font-weight: 700;
+            color: var(--naranja);
+            font-size: 1.1rem;
+        }
+        .artisan-stat-label {
+            font-size: 0.8rem;
+            color: var(--texto-gris);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .review-card {
+            background: var(--gris-fondo);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .review-product {
+            font-weight: bold;
+            color: var(--marron);
+        }
+        .review-rating {
+            color: var(--naranja);
+            font-size: 1.2rem;
+        }
+        .review-text {
+            color: var(--texto-gris);
+            line-height: 1.6;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--texto-gris);
+        }
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .main-content {
+                order: 1;
+            }
+            .profile-form {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .sidebar-header {
+                padding: 1rem;
+            }
+            .sidebar-header h3 {
+                font-size: 1.1rem;
+            }
+            .sidebar-header p {
+                font-size: 0.8rem;
+            }
+            .sidebar-menu a {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            .sidebar-menu a span {
+                font-size: 1rem;
+                margin-right: 0.5rem;
+            }
+            .sidebar-footer {
+                padding: 0.75rem 1rem;
+            }
+            .sidebar-footer a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-info">
+            <h1>Mi Cuenta - Artesanías Zenú</h1>
+            <p>Bienvenido de vuelta, <span id="user-name">Usuario</span></p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-header" onclick="abrirCarrito()">🛒 Mi Carrito</button>
+            <a href="../index.html" class="btn-secondary">🏠 Ir a la Tienda</a>
+            <button class="btn-secondary" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Volver al inicio</a>
+        
+        <div class="dashboard-layout">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h3>Mi Cuenta</h3>
+                    <p>Panel de Control</p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="menu-link active" data-section="overview"><span>📊</span>Resumen</a></li>
+                    <li><a href="#" class="menu-link" data-section="orders"><span>📦</span>Mis Pedidos</a></li>
+                    <li><a href="#" class="menu-link" data-section="favorites"><span>❤️</span>Favoritos</a></li>
+                    <li><a href="#" class="menu-link" data-section="recent"><span>🕒</span>Recientes</a></li>
+                    <li><a href="#" class="menu-link" data-section="artisans"><span>👥</span>Artesanos</a></li>
+                    <li><a href="#" class="menu-link" data-section="reviews"><span>⭐</span>Mis Reseñas</a></li>
+                    <li><a href="#" class="menu-link" data-section="profile"><span>👤</span>Mi Perfil</a></li>
+                    <li><a href="#" class="menu-link" data-section="settings"><span>⚙️</span>Configuración</a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a href="../index.html"><span>🏠</span>Volver a la Tienda</a>
+                    <a href="#" onclick="cerrarSesion()"><span>🚪</span>Cerrar Sesión</a>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <!-- SECCIÓN RESUMEN -->
+                <div class="content-section active" id="overview">
+                    <h2 class="section-title">Resumen de Mi Cuenta</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📦</div>
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Pedidos Totales</div>
+                            <div class="stat-trend positive">↗ +15% este mes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">❤️</div>
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Productos Favoritos</div>
+                            <div class="stat-trend positive">↗ +3 esta semana</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Artesanos Seguidos</div>
+                            <div class="stat-trend positive">↗ +1 nuevo</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-number">$2.45M</div>
+                            <div class="stat-label">Total Gastado</div>
+                            <div class="stat-trend positive">↗ +$180K este mes</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--marron); margin-bottom: 1rem;">Pedidos Recientes</h3>
+                    <div class="orders-list">
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>📦 Pedido #001234</h4>
+                                <p><strong>Canasto Zenú, Mochila Artesanal</strong> - Artesanías tradicionales</p>
+                                <p class="order-date">📅 15 de Diciembre, 2024</p>
+                                <p>💰 Total: $125.000</p>
+                            </div>
+                            <div class="order-status status-delivered">✅ Entregado</div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>📦 Pedido #001235</h4>
+                                <p><strong>Sombrero Vueltiao, Pulsera Tejida</strong> - Tradición Zenú</p>
+                                <p class="order-date">📅 10 de Diciembre, 2024</p>
+                                <p>💰 Total: $95.000</p>
+                            </div>
+                            <div class="order-status status-shipped">🚚 En Camino</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN PEDIDOS -->
+                <div class="content-section" id="orders">
+                    <h2 class="section-title">Mis Pedidos</h2>
+                    
+                    <div class="orders-list">
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>Pedido #001235</h4>
+                                <p>Sombrero Vueltiao, Pulsera Tejida</p>
+                                <p>Fecha: 10 de Diciembre, 2024 • Total: $95.000</p>
+                            </div>
+                            <div class="order-status status-shipped">En Camino</div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>Pedido #001234</h4>
+                                <p>Canasto Zenú, Mochila Artesanal</p>
+                                <p>Fecha: 15 de Diciembre, 2024 • Total: $105.000</p>
+                            </div>
+                            <div class="order-status status-delivered">Entregado</div>
+                        </div>
+                        <div class="order-card">
+                            <div class="order-info">
+                                <h4>Pedido #001233</h4>
+                                <p>Canasto Pequeño</p>
+                                <p>Fecha: 5 de Diciembre, 2024 • Total: $35.000</p>
+                            </div>
+                            <div class="order-status status-delivered">Entregado</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN FAVORITOS -->
+                <div class="content-section" id="favorites">
+                    <h2 class="section-title">Mis Productos Favoritos</h2>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-badge">⭐ Favorito</div>
+                            <div class="product-image">🧺</div>
+                            <div class="product-info">
+                                <div class="product-name">Canasto Zenú Grande</div>
+                                <div class="product-description">Artesanía tradicional tejida a mano con fibras naturales</div>
+                                <div class="product-rating">
+                                    <span class="product-stars">⭐⭐⭐⭐⭐</span>
+                                    <span class="product-rating-text">(4.8) 24 reseñas</span>
+                                </div>
+                                <div class="product-price">$65.000</div>
+                                <button class="btn" style="width: 100%; margin-top: 0.5rem;" onclick="agregarProductoAlCarrito('Canasto Zenú Grande', 65000, '🧺')">🛒 Agregar al Carrito</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-badge">🔥 Popular</div>
+                            <div class="product-image">🎒</div>
+                            <div class="product-info">
+                                <div class="product-name">Mochila Escolar</div>
+                                <div class="product-description">Diseño Wayuu con colores vibrantes y resistente</div>
+                                <div class="product-rating">
+                                    <span class="product-stars">⭐⭐⭐⭐⭐</span>
+                                    <span class="product-rating-text">(4.9) 18 reseñas</span>
+                                </div>
+                                <div class="product-price">$95.000</div>
+                                <button class="btn" style="width: 100%; margin-top: 0.5rem;" onclick="agregarProductoAlCarrito('Mochila Escolar', 95000, '🎒')">🛒 Agregar al Carrito</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-badge">✨ Nuevo</div>
+                            <div class="product-image">👒</div>
+                            <div class="product-info">
+                                <div class="product-name">Sombrero Vueltiao</div>
+                                <div class="product-description">Símbolo de la cultura Zenú, tejido artesanalmente</div>
+                                <div class="product-rating">
+                                    <span class="product-stars">⭐⭐⭐⭐⭐</span>
+                                    <span class="product-rating-text">(4.7) 31 reseñas</span>
+                                </div>
+                                <div class="product-price">$85.000</div>
+                                <button class="btn" style="width: 100%; margin-top: 0.5rem;" onclick="agregarProductoAlCarrito('Sombrero Vueltiao', 85000, '👒')">🛒 Agregar al Carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN RECIENTES -->
+                <div class="content-section" id="recent">
+                    <h2 class="section-title">Productos Vistos Recientemente</h2>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">💎</div>
+                            <div class="product-info">
+                                <div class="product-name">Pulsera Tradicional</div>
+                                <div class="product-price">$45.000</div>
+                                <button class="btn" style="width: 100%; margin-top: 0.5rem;" onclick="verProducto('Pulsera Tradicional')">Ver Producto</button>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">🧺</div>
+                            <div class="product-info">
+                                <div class="product-name">Canasto Pequeño</div>
+                                <div class="product-price">$35.000</div>
+                                <button class="btn" style="width: 100%; margin-top: 0.5rem;" onclick="verProducto('Canasto Pequeño')">Ver Producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN ARTESANOS -->
+                <div class="content-section" id="artisans">
+                    <h2 class="section-title">Artesanos que Sigo</h2>
+                    
+                    <div class="products-grid">
+                        <div class="artisan-card">
+                            <div class="artisan-avatar">👨‍🎨</div>
+                            <div class="artisan-name">Carlos Mendoza</div>
+                            <div class="artisan-specialty">Especialista en Canastos</div>
+                            <div class="artisan-stats">
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">24</div>
+                                    <div class="artisan-stat-label">Productos</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">4.9</div>
+                                    <div class="artisan-stat-label">Rating</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">156</div>
+                                    <div class="artisan-stat-label">Ventas</div>
+                                </div>
+                            </div>
+                            <button class="btn-outline">👥 Ver Perfil</button>
+                        </div>
+                        <div class="artisan-card">
+                            <div class="artisan-avatar">👩‍🎨</div>
+                            <div class="artisan-name">María González</div>
+                            <div class="artisan-specialty">Especialista en Mochilas</div>
+                            <div class="artisan-stats">
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">18</div>
+                                    <div class="artisan-stat-label">Productos</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">4.8</div>
+                                    <div class="artisan-stat-label">Rating</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">89</div>
+                                    <div class="artisan-stat-label">Ventas</div>
+                                </div>
+                            </div>
+                            <button class="btn-outline">👥 Ver Perfil</button>
+                        </div>
+                        <div class="artisan-card">
+                            <div class="artisan-avatar">👨‍🎨</div>
+                            <div class="artisan-name">José Rodríguez</div>
+                            <div class="artisan-specialty">Especialista en Sombreros</div>
+                            <div class="artisan-stats">
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">31</div>
+                                    <div class="artisan-stat-label">Productos</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">4.7</div>
+                                    <div class="artisan-stat-label">Rating</div>
+                                </div>
+                                <div class="artisan-stat">
+                                    <div class="artisan-stat-number">203</div>
+                                    <div class="artisan-stat-label">Ventas</div>
+                                </div>
+                            </div>
+                            <button class="btn-outline">👥 Ver Perfil</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN RESEÑAS -->
+                <div class="content-section" id="reviews">
+                    <h2 class="section-title">Mis Reseñas</h2>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-product">Canasto Zenú Grande</div>
+                            <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="review-text">
+                            "Excelente calidad y acabado. El canasto es muy resistente y el diseño tradicional es hermoso. Definitivamente recomiendo este producto."
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-product">Mochila Escolar</div>
+                            <div class="review-rating">⭐⭐⭐⭐</div>
+                        </div>
+                        <div class="review-text">
+                            "Muy buena mochila, resistente y cómoda. El único detalle es que tardó un poco en llegar, pero vale la pena la espera."
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SECCIÓN PERFIL -->
+                <div class="content-section" id="profile">
+                    <h2 class="section-title">Mi Perfil</h2>
+                    
+                    <form class="profile-form" onsubmit="guardarPerfil(event)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" value="Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" value="juan.perez@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" value="+57 300 123 4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                            <input type="date" id="fecha_nacimiento" value="1990-05-15">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="direccion">Dirección</label>
+                            <textarea id="direccion" rows="3">Calle 123 #45-67, Bogotá, Colombia</textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn">Guardar Cambios</button>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn-outline" onclick="cambiarContraseña()">Cambiar Contraseña</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- SECCIÓN CONFIGURACIÓN -->
+                <div class="content-section" id="settings">
+                    <h2 class="section-title">Configuración</h2>
+                    
+                    <div style="display: grid; gap: 2rem;">
+                        <div>
+                            <h3 style="color: var(--marron); margin-bottom: 1rem;">Notificaciones</h3>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> Recibir notificaciones de nuevos productos
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> Recibir notificaciones de pedidos
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox"> Recibir ofertas especiales
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--marron); margin-bottom: 1rem;">Privacidad</h3>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> Mostrar mi perfil público
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox"> Permitir que otros usuarios me contacten
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 style="color: var(--marron); margin-bottom: 1rem;">Preferencias de Idioma</h3>
+                            <select style="padding: 0.75rem; border: 1px solid var(--gris-borde); border-radius: 6px; width: 200px;">
+                                <option value="es">Español</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn" onclick="guardarConfiguracion()">Guardar Configuración</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRITO DESLIZABLE -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-slide" id="cart-slide">
+        <div class="cart-header">
+            <h3>Mi Carrito</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <!-- Los productos del carrito se cargarán dinámicamente -->
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Subtotal:</span>
+                    <span class="cart-summary-value" id="cart-subtotal">$0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Envío:</span>
+                    <span class="cart-summary-value" id="cart-shipping">Gratis</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Total:</span>
+                    <span class="cart-summary-value" id="cart-total-summary">$0</span>
+                </div>
+            </div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cart-total">$0</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-comprar" id="btn-comprar" disabled>Comprar Ahora</button>
+                <button class="btn-continuar" id="btn-continuar">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/carrito.js"></script>
+    <script>
+        // VARIABLES GLOBALES
+        let carrito = JSON.parse(localStorage.getItem('carritoArtesanias')) || [];
+        let currentSection = 'overview';
+
+        // ELEMENTOS DEL DOM
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartSlide = document.getElementById('cart-slide');
+        const cartContent = document.getElementById('cart-content');
+        const cartTotal = document.getElementById('cart-total');
+        const btnComprar = document.getElementById('btn-comprar');
+        const btnContinuar = document.getElementById('btn-continuar');
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCarrito();
+            configurarNavegacion();
+            verificarUsuarioLogueado();
+            cargarPerfil();
+            cargarConfiguracion();
+        });
+
+        function verificarUsuarioLogueado() {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (!usuarioLogueado) {
+                alert('Debes iniciar sesión para acceder al dashboard');
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            const usuario = localStorage.getItem('usuario') || 'Usuario';
+            document.getElementById('user-name').textContent = usuario;
+            
+            // Cargar datos del usuario desde localStorage
+            cargarDatosUsuario();
+        }
+
+        function cargarDatosUsuario() {
+            // Cargar estadísticas del usuario
+            const stats = JSON.parse(localStorage.getItem('usuarioStats')) || {
+                pedidosTotales: 12,
+                productosFavoritos: 8,
+                artesanosSeguidos: 5,
+                totalGastado: 2450000
+            };
+            
+            // Actualizar estadísticas en el resumen
+            document.querySelector('.stat-card:nth-child(1) .stat-number').textContent = stats.pedidosTotales;
+            document.querySelector('.stat-card:nth-child(2) .stat-number').textContent = stats.productosFavoritos;
+            document.querySelector('.stat-card:nth-child(3) .stat-number').textContent = stats.artesanosSeguidos;
+            document.querySelector('.stat-card:nth-child(4) .stat-number').textContent = `$${stats.totalGastado.toLocaleString()}`;
+        }
+
+        function configurarNavegacion() {
+            const menuLinks = document.querySelectorAll('.menu-link');
+            const sections = document.querySelectorAll('.content-section');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remover clase active de todos los enlaces
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    // Agregar clase active al enlace clickeado
+                    this.classList.add('active');
+                    
+                    // Ocultar todas las secciones
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Mostrar la sección correspondiente
+                    const targetSection = this.getAttribute('data-section');
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    currentSection = targetSection;
+                });
+            });
+        }
+
+        function abrirCarrito() {
+            cartOverlay.classList.add('active');
+            cartSlide.classList.add('active');
+            actualizarCarrito();
+        }
+
+        function cerrarCarrito() {
+            cartOverlay.classList.remove('active');
+            cartSlide.classList.remove('active');
+        }
+
+        function actualizarCarrito() {
+            // Actualizar badge
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            
+            // Actualizar contenido del carrito
+            if (carrito.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <h4>Tu carrito está vacío</h4>
+                        <p>Descubre nuestras hermosas artesanías Zenú y agrega algunos productos para comenzar tu compra</p>
+                        <button class="btn-explorar" onclick="cerrarCarrito()">Explorar Productos</button>
+                    </div>
+                `;
+                btnComprar.disabled = true;
+                cartTotal.textContent = '$0';
+                document.getElementById('cart-summary').style.display = 'none';
+            } else {
+                cartContent.innerHTML = carrito.map(item => {
+                    const subtotal = item.precio * item.cantidad;
+                    return `
+                        <div class="cart-item" data-id="${item.id}">
+                            <div class="cart-item-image">
+                                <img src="${item.imagen}" alt="${item.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="fallback-icon" style="display: none;">${item.icono || '🏺'}</div>
+                            </div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.nombre}</div>
+                                <div class="cart-item-description">${item.descripcion || 'Producto artesanal Zenú'}</div>
+                                <div class="cart-item-price-container">
+                                    <div class="cart-item-price">$${item.precio.toLocaleString()}</div>
+                                    <div class="cart-item-subtotal">Subtotal: $${subtotal.toLocaleString()}</div>
+                                </div>
+                                <div class="cart-item-quantity">
+                                    <span class="quantity-label">Cantidad:</span>
+                                    <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                                    <span class="quantity-display">${item.cantidad}</span>
+                                    <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" onclick="eliminarItem(${item.id})" title="Eliminar del carrito">🗑️</button>
+                        </div>
+                    `;
+                }).join('');
+
+                // Calcular totales
+                const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+                const shipping = subtotal > 100000 ? 0 : 15000;
+                const total = subtotal + shipping;
+
+                // Actualizar resumen
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+                document.getElementById('cart-shipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString()}`;
+                document.getElementById('cart-total-summary').textContent = `$${total.toLocaleString()}`;
+                document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+                
+                // Mostrar resumen
+                document.getElementById('cart-summary').style.display = 'block';
+                btnComprar.disabled = false;
+            }
+        }
+
+        function cambiarCantidad(id, cambio) {
+            const item = carrito.find(item => item.id === id);
+            if (!item) return;
+
+            item.cantidad += cambio;
+            
+            if (item.cantidad <= 0) {
+                eliminarItem(id);
+            } else {
+                actualizarCarrito();
+                guardarCarrito();
+            }
+        }
+
+        function eliminarItem(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarCarrito();
+            guardarCarrito();
+        }
+
+        function comprar() {
+            if (carrito.length === 0) return;
+
+            const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000;
+            const total = subtotal + shipping;
+            
+            const resumen = carrito.map(item => 
+                `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}`
+            ).join('\n');
+
+            const confirmacion = `¿Confirmar compra?\n\n${resumen}\n\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'Gratis' : '$' + shipping.toLocaleString()}\n\nTOTAL: $${total.toLocaleString()}`;
+
+            if (confirm(confirmacion)) {
+                alert('¡Compra realizada con éxito! Te contactaremos pronto para coordinar la entrega.');
+                carrito = [];
+                actualizarCarrito();
+                guardarCarrito();
+                cerrarCarrito();
+            }
+        }
+
+        function cerrarSesion() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('usuarioLogueado');
+                localStorage.removeItem('usuario');
+                alert('Sesión cerrada correctamente');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Funciones para productos
+        function agregarProductoAlCarrito(nombre, precio, icono) {
+            const producto = {
+                id: Date.now(),
+                nombre: nombre,
+                precio: precio,
+                imagen: `../image/${nombre.toLowerCase().replace(/\s+/g, '_')}.jpg`,
+                icono: icono,
+                descripcion: 'Producto artesanal Zenú'
+            };
+
+            const itemExistente = carrito.find(item => item.nombre === producto.nombre);
+            if (itemExistente) {
+                itemExistente.cantidad += 1;
+            } else {
+                carrito.push({
+                    ...producto,
+                    cantidad: 1
+                });
+            }
+
+            actualizarCarrito();
+            guardarCarrito();
+            mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+        }
+
+        function verProducto(nombre) {
+            // Simular navegación a página de producto
+            alert(`Redirigiendo a la página de ${nombre}`);
+        }
+
+        function mostrarNotificacion(mensaje) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--naranja);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = mensaje;
+            document.body.appendChild(notification);
+
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function guardarPerfil(event) {
+            event.preventDefault();
+            
+            const perfil = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                fechaNacimiento: document.getElementById('fecha_nacimiento').value,
+                direccion: document.getElementById('direccion').value
+            };
+            
+            // Guardar en localStorage
+            localStorage.setItem('usuarioPerfil', JSON.stringify(perfil));
+            
+            // Actualizar nombre en el header
+            document.getElementById('user-name').textContent = perfil.nombre;
+            
+            mostrarNotificacion('Perfil actualizado correctamente');
+        }
+
+        function cambiarContraseña() {
+            const nuevaContraseña = prompt('Ingresa tu nueva contraseña:');
+            if (nuevaContraseña && nuevaContraseña.length >= 6) {
+                // Simular cambio de contraseña
+                localStorage.setItem('usuarioContraseña', nuevaContraseña);
+                mostrarNotificacion('Contraseña actualizada correctamente');
+            } else if (nuevaContraseña) {
+                alert('La contraseña debe tener al menos 6 caracteres');
+            }
+        }
+
+        function cargarPerfil() {
+            const perfil = JSON.parse(localStorage.getItem('usuarioPerfil'));
+            if (perfil) {
+                document.getElementById('nombre').value = perfil.nombre || 'Juan Pérez';
+                document.getElementById('email').value = perfil.email || 'juan.perez@email.com';
+                document.getElementById('telefono').value = perfil.telefono || '+57 300 123 4567';
+                document.getElementById('fecha_nacimiento').value = perfil.fechaNacimiento || '1990-05-15';
+                document.getElementById('direccion').value = perfil.direccion || 'Calle 123 #45-67, Bogotá, Colombia';
+            }
+        }
+
+        function guardarConfiguracion() {
+            const configuracion = {
+                notificaciones: {
+                    nuevosProductos: document.querySelector('input[type="checkbox"]:nth-of-type(1)').checked,
+                    pedidos: document.querySelector('input[type="checkbox"]:nth-of-type(2)').checked,
+                    ofertas: document.querySelector('input[type="checkbox"]:nth-of-type(3)').checked
+                },
+                privacidad: {
+                    perfilPublico: document.querySelector('input[type="checkbox"]:nth-of-type(4)').checked,
+                    permitirContacto: document.querySelector('input[type="checkbox"]:nth-of-type(5)').checked
+                },
+                idioma: document.querySelector('select').value
+            };
+            
+            localStorage.setItem('usuarioConfiguracion', JSON.stringify(configuracion));
+            mostrarNotificacion('Configuración guardada correctamente');
+        }
+
+        function cargarConfiguracion() {
+            const configuracion = JSON.parse(localStorage.getItem('usuarioConfiguracion'));
+            if (configuracion) {
+                // Cargar notificaciones
+                if (configuracion.notificaciones) {
+                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                    checkboxes[0].checked = configuracion.notificaciones.nuevosProductos;
+                    checkboxes[1].checked = configuracion.notificaciones.pedidos;
+                    checkboxes[2].checked = configuracion.notificaciones.ofertas;
+                    checkboxes[3].checked = configuracion.privacidad.perfilPublico;
+                    checkboxes[4].checked = configuracion.privacidad.permitirContacto;
+                }
+                
+                // Cargar idioma
+                if (configuracion.idioma) {
+                    document.querySelector('select').value = configuracion.idioma;
+                }
+            }
+        }
+
+        // Event listeners del carrito
+        document.getElementById('cart-close').onclick = cerrarCarrito;
+        document.getElementById('btn-comprar').onclick = comprar;
+        document.getElementById('btn-continuar').onclick = cerrarCarrito;
+        cartOverlay.onclick = cerrarCarrito;
+    </script>
+</body>
+</html>

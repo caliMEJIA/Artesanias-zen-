@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - Artesanías Zenú</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .dashboard-home {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .welcome-section {
+            background: linear-gradient(135deg, var(--naranja), var(--marron));
+            color: #fff;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .welcome-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .welcome-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .action-card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .action-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .action-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--marron);
+            margin-bottom: 0.5rem;
+        }
+        .action-description {
+            color: var(--texto-gris);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .recent-activity {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gris-fondo);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: background 0.3s ease;
+        }
+        .activity-item:hover {
+            background: var(--gris-tarjeta);
+        }
+        .activity-item:last-child {
+            margin-bottom: 0;
+        }
+        .activity-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--naranja);
+            color: #fff;
+            border-radius: 50%;
+        }
+        .activity-content h4 {
+            color: var(--marron);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+        .activity-content p {
+            color: var(--texto-gris);
+            font-size: 0.85rem;
+        }
+        .activity-time {
+            color: var(--texto-gris);
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        .recommendations {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .product-card {
+            background: var(--gris-fondo);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--gris-borde);
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 120px;
+            background: var(--gris-borde);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--naranja);
+        }
+        .product-info {
+            padding: 1rem;
+        }
+        .product-name {
+            font-weight: bold;
+            color: var(--marron);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .product-price {
+            color: var(--naranja);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--naranja);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: var(--texto-gris);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--marron);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        /* Estilos para gráficos */
+        .charts-section {
+            margin-bottom: 2rem;
+        }
+        .chart-container {
+            background: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .chart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gris-borde);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--marron);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .chart-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chart-filter {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gris-borde);
+            border-radius: 20px;
+            background: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .chart-filter.active {
+            background: var(--naranja);
+            color: white;
+            border-color: var(--naranja);
+        }
+        .chart-content {
+            padding: 1.5rem;
+            position: relative;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .chart-canvas {
+            max-height: 100%;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .mini-charts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .mini-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .mini-chart {
+            background: var(--blanco);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .mini-chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .mini-chart-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--marron);
+        }
+        .mini-chart-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--naranja);
+        }
+        .mini-chart-canvas {
+            height: 120px;
+        }
+        .progress-chart {
+            margin-top: 1rem;
+        }
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--texto-gris);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gris-fondo);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--naranja), var(--marron));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .progress-percentage {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--marron);
+        }
+
+        @media (max-width: 768px) {
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .mini-charts-section {
+                grid-template-columns: 1fr;
+            }
+            .mini-charts {
+                grid-template-columns: 1fr;
+            }
+            .chart-wrapper {
+                height: 250px;
+            }
+            .chart-filters {
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            .chart-filter {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SUPERIOR -->
+    <div class="header-top">
+        <div class="header-container">
+            <div class="logo">Artesanías Zenú <span>• Panel Admin</span></div>
+            <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span class="welcome-text">¡Hola, <span id="user-name">Admin</span>!</span>
+                    <button class="header-action logout-btn" id="btn-logout" title="Cerrar sesión">🚪</button>
+                </div>
+                <button class="header-action" id="btn-carrito" title="Carrito">
+                    🛒<span class="badge" id="carrito-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="menu-categorias">
+        <div class="categorias-container">
+            <a href="../index.html" class="categoria-link">🏠 Inicio</a>
+            <a href="usuario.html" class="categoria-link">👤 Dashboard Usuario</a>
+            <a href="admin.html" class="categoria-link active">⚙️ Panel Admin</a>
+            <a href="../canastos.html" class="categoria-link">🧺 Canastos</a>
+            <a href="../mochilas.html" class="categoria-link">🎒 Mochilas</a>
+            <a href="../sombreros.html" class="categoria-link">👒 Sombreros</a>
+            <a href="../pulseras.html" class="categoria-link">💎 Pulseras</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-home">
+        <!-- SECCIÓN DE BIENVENIDA -->
+        <div class="welcome-section">
+            <h2>¡Bienvenido al Panel de Administración!</h2>
+            <p>Gestiona productos, pedidos, usuarios y analiza el rendimiento de la tienda</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="dashboard.html" class="btn">Ver Dashboard Completo</a>
+                <a href="../index.html" class="btn-outline">Ir a la Tienda</a>
+            </div>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div class="quick-actions">
+            <div class="action-card" onclick="navegarSeccion('products')">
+                <span class="action-icon">📦</span>
+                <div class="action-title">Gestión de Productos</div>
+                <div class="action-description">Administra el catálogo de artesanías, añade nuevos productos y gestiona inventario</div>
+            </div>
+            <div class="action-card" onclick="navegarSeccion('orders')">
+                <span class="action-icon">🛒</span>
+                <div class="action-title">Pedidos y Ventas</div>
+                <div class="action-description">Revisa y procesa pedidos, gestiona el estado de envíos y ventas</div>
+            </div>
+            <div class="action-card" onclick="navegarSeccion('users')">
+                <span class="action-icon">👥</span>
+                <div class="action-title">Gestión de Usuarios</div>
+                <div class="action-description">Administra usuarios, artesanos y permisos del sistema</div>
+            </div>
+            <div class="action-card" onclick="navegarSeccion('reports')">
+                <span class="action-icon">📊</span>
+                <div class="action-title">Reportes y Análisis</div>
+                <div class="action-description">Visualiza reportes de ventas, análisis de productos y estadísticas</div>
+            </div>
+        </div>
+
+        <!-- ESTADÍSTICAS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-productos">1,247</div>
+                <div class="stat-label">Productos en Venta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-pedidos">342</div>
+                <div class="stat-label">Pedidos del Mes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-artesanos">89</div>
+                <div class="stat-label">Artesanos Activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-ingresos">$45.2M</div>
+                <div class="stat-label">Ingresos Totales</div>
+            </div>
+        </div>
+
+        <!-- ACTIVIDAD RECIENTE -->
+        <div class="recent-activity">
+            <h2 class="section-title">Actividad Reciente</h2>
+            <div class="activity-item">
+                <div class="activity-icon">🛒</div>
+                <div class="activity-content">
+                    <h4>Nuevo pedido recibido</h4>
+                    <p>Pedido #001247 - Canasto Zenú Grande por $125.000</p>
+                </div>
+                <div class="activity-time">Hace 5 minutos</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">👥</div>
+                <div class="activity-content">
+                    <h4>Nuevo artesano registrado</h4>
+                    <p>Carlos Mendoza - Especialista en Canastos</p>
+                </div>
+                <div class="activity-time">Hace 1 hora</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">⭐</div>
+                <div class="activity-content">
+                    <h4>Nueva reseña 5 estrellas</h4>
+                    <p>Mochila Escolar - Cliente: Ana Rodríguez</p>
+                </div>
+                <div class="activity-time">Hace 2 horas</div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">📦</div>
+                <div class="activity-content">
+                    <h4>Producto agotado</h4>
+                    <p>Canasto Zenú Pequeño - Stock: 0 unidades</p>
+                </div>
+                <div class="activity-time">Hace 3 horas</div>
+            </div>
+        </div>
+
+        <!-- PRODUCTOS DESTACADOS -->
+        <div class="recommendations">
+            <h2 class="section-title">Productos Destacados</h2>
+            <p style="color: var(--texto-gris); margin-bottom: 1.5rem;">Los productos más vendidos y con mejor rendimiento</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">🧺</div>
+                    <div class="product-info">
+                        <div class="product-name">Canasto Zenú Grande</div>
+                        <div class="product-price">$65.000</div>
+                        <div style="font-size: 0.8rem; color: var(--texto-gris); margin-top: 0.5rem;">156 vendidos</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎒</div>
+                    <div class="product-info">
+                        <div class="product-name">Mochila Escolar</div>
+                        <div class="product-price">$95.000</div>
+                        <div style="font-size: 0.8rem; color: var(--texto-gris); margin-top: 0.5rem;">89 vendidos</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">👒</div>
+                    <div class="product-info">
+                        <div class="product-name">Sombrero Vueltiao</div>
+                        <div class="product-price">$85.000</div>
+                        <div style="font-size: 0.8rem; color: var(--texto-gris); margin-top: 0.5rem;">67 vendidos</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <div class="product-name">Pulsera Tradicional</div>
+                        <div class="product-price">$45.000</div>
+                        <div style="font-size: 0.8rem; color: var(--texto-gris); margin-top: 0.5rem;">134 vendidos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE GRÁFICOS -->
+        <div class="charts-section">
+            <h2 class="section-title">Análisis y Reportes</h2>
+            
+            <!-- Gráfico principal de ventas -->
+            <div class="chart-container sales-chart">
+                <div class="chart-header">
+                    <h3 class="chart-title">
+                        <i class="fas fa-chart-line"></i>
+                        Análisis de Ventas
+                    </h3>
+                    <div class="chart-filters">
+                        <button class="chart-filter active" data-period="month">Mes</button>
+                        <button class="chart-filter" data-period="quarter">Trimestre</button>
+                        <button class="chart-filter" data-period="year">Año</button>
+                    </div>
+                </div>
+                <div class="chart-content">
+                    <div class="chart-wrapper">
+                        <canvas id="salesChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos secundarios -->
+            <div class="charts-grid">
+                <!-- Gráfico de categorías -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Ventas por Categoría
+                        </h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="chart-wrapper">
+                            <canvas id="categoryChart" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de artesanos -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Top Artesanos
+                        </h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="chart-wrapper">
+                            <canvas id="artisanChart" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini gráficos y progreso -->
+            <div class="mini-charts-section">
+                <!-- Mini gráficos -->
+                <div class="mini-charts">
+                    <div class="mini-chart">
+                        <div class="mini-chart-header">
+                            <span class="mini-chart-title">Conversión</span>
+                            <span class="mini-chart-value">3.2%</span>
+                        </div>
+                        <div class="mini-chart-canvas">
+                            <canvas id="conversionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mini-chart">
+                        <div class="mini-chart-header">
+                            <span class="mini-chart-title">Ticket Promedio</span>
+                            <span class="mini-chart-value">$85K</span>
+                        </div>
+                        <div class="mini-chart-canvas">
+                            <canvas id="ticketChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progreso de metas -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i class="fas fa-target"></i>
+                            Progreso de Metas
+                        </h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="progress-chart">
+                            <div class="progress-item">
+                                <span class="progress-label">Ventas Mensuales</span>
+                                <span class="progress-percentage">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            
+                            <div class="progress-item">
+                                <span class="progress-label">Nuevos Usuarios</span>
+                                <span class="progress-percentage">92%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%;"></div>
+                            </div>
+                            
+                            <div class="progress-item">
+                                <span class="progress-label">Productos Vendidos</span>
+                                <span class="progress-percentage">78%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%;"></div>
+                            </div>
+                            
+                            <div class="progress-item">
+                                <span class="progress-label">Satisfacción Cliente</span>
+                                <span class="progress-percentage">96%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 96%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRITO DESLIZABLE -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-slide" id="cart-slide">
+        <div class="cart-header">
+            <h3>Mi Carrito</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <!-- Los productos del carrito se cargarán dinámicamente -->
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Subtotal:</span>
+                    <span class="cart-summary-value" id="cart-subtotal">$0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Envío:</span>
+                    <span class="cart-summary-value" id="cart-shipping">Gratis</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Total:</span>
+                    <span class="cart-summary-value" id="cart-total-summary">$0</span>
+                </div>
+            </div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cart-total">$0</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-comprar" id="btn-comprar" disabled>Comprar Ahora</button>
+                <button class="btn-continuar" id="btn-continuar">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/carrito.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // VARIABLES GLOBALES
+        let carrito = JSON.parse(localStorage.getItem('carritoArtesanias')) || [];
+
+        // ELEMENTOS DEL DOM
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartSlide = document.getElementById('cart-slide');
+        const cartContent = document.getElementById('cart-content');
+        const cartTotal = document.getElementById('cart-total');
+        const btnComprar = document.getElementById('btn-comprar');
+        const btnContinuar = document.getElementById('btn-continuar');
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCarrito();
+            verificarUsuarioLogueado();
+            cargarDatosAdmin();
+            initializeCharts();
+        });
+
+        function verificarUsuarioLogueado() {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (!usuarioLogueado) {
+                alert('Debes iniciar sesión como administrador para acceder al panel');
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            const usuario = localStorage.getItem('usuario') || 'Admin';
+            document.getElementById('user-name').textContent = usuario;
+            document.getElementById('user-info').style.display = 'flex';
+        }
+
+        function cargarDatosAdmin() {
+            // Cargar estadísticas del administrador
+            const stats = JSON.parse(localStorage.getItem('adminStats')) || {
+                productosTotales: 1247,
+                pedidosMes: 342,
+                artesanosActivos: 89,
+                ingresosTotales: 45200000
+            };
+            
+            // Actualizar estadísticas
+            document.getElementById('total-productos').textContent = stats.productosTotales.toLocaleString();
+            document.getElementById('total-pedidos').textContent = stats.pedidosMes.toLocaleString();
+            document.getElementById('total-artesanos').textContent = stats.artesanosActivos.toLocaleString();
+            document.getElementById('total-ingresos').textContent = `$${(stats.ingresosTotales / 1000000).toFixed(1)}M`;
+        }
+
+        function navegarSeccion(seccion) {
+            // Redirigir al dashboard completo con la sección específica
+            window.location.href = `dashboard.html#${seccion}`;
+        }
+
+        function abrirCarrito() {
+            cartOverlay.classList.add('active');
+            cartSlide.classList.add('active');
+            actualizarCarrito();
+        }
+
+        function cerrarCarrito() {
+            cartOverlay.classList.remove('active');
+            cartSlide.classList.remove('active');
+        }
+
+        function actualizarCarrito() {
+            // Actualizar badge
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            document.getElementById('carrito-badge').textContent = totalItems;
+            
+            // Actualizar contenido del carrito
+            if (carrito.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <h4>Tu carrito está vacío</h4>
+                        <p>Descubre nuestras hermosas artesanías Zenú y agrega algunos productos para comenzar tu compra</p>
+                        <button class="btn-explorar" onclick="cerrarCarrito()">Explorar Productos</button>
+                    </div>
+                `;
+                btnComprar.disabled = true;
+                cartTotal.textContent = '$0';
+                document.getElementById('cart-summary').style.display = 'none';
+            } else {
+                cartContent.innerHTML = carrito.map(item => {
+                    const subtotal = item.precio * item.cantidad;
+                    return `
+                        <div class="cart-item" data-id="${item.id}">
+                            <div class="cart-item-image">
+                                <img src="${item.imagen}" alt="${item.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="fallback-icon" style="display: none;">${item.icono || '🏺'}</div>
+                            </div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.nombre}</div>
+                                <div class="cart-item-description">${item.descripcion || 'Producto artesanal Zenú'}</div>
+                                <div class="cart-item-price-container">
+                                    <div class="cart-item-price">$${item.precio.toLocaleString()}</div>
+                                    <div class="cart-item-subtotal">Subtotal: $${subtotal.toLocaleString()}</div>
+                                </div>
+                                <div class="cart-item-quantity">
+                                    <span class="quantity-label">Cantidad:</span>
+                                    <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                                    <span class="quantity-display">${item.cantidad}</span>
+                                    <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" onclick="eliminarItem(${item.id})" title="Eliminar del carrito">🗑️</button>
+                        </div>
+                    `;
+                }).join('');
+
+                // Calcular totales
+                const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+                const shipping = subtotal > 100000 ? 0 : 15000;
+                const total = subtotal + shipping;
+
+                // Actualizar resumen
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+                document.getElementById('cart-shipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString()}`;
+                document.getElementById('cart-total-summary').textContent = `$${total.toLocaleString()}`;
+                document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+                
+                // Mostrar resumen
+                document.getElementById('cart-summary').style.display = 'block';
+                btnComprar.disabled = false;
+            }
+        }
+
+        function cambiarCantidad(id, cambio) {
+            const item = carrito.find(item => item.id === id);
+            if (!item) return;
+
+            item.cantidad += cambio;
+            
+            if (item.cantidad <= 0) {
+                eliminarItem(id);
+            } else {
+                actualizarCarrito();
+                guardarCarrito();
+            }
+        }
+
+        function eliminarItem(id) {
+            carrito = carrito.filter(item => item.id !== id);
+            actualizarCarrito();
+            guardarCarrito();
+        }
+
+        function comprar() {
+            if (carrito.length === 0) return;
+
+            const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000;
+            const total = subtotal + shipping;
+            
+            const resumen = carrito.map(item => 
+                `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}`
+            ).join('\n');
+
+            const confirmacion = `¿Confirmar compra?\n\n${resumen}\n\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'Gratis' : '$' + shipping.toLocaleString()}\n\nTOTAL: $${total.toLocaleString()}`;
+
+            if (confirm(confirmacion)) {
+                alert('¡Compra realizada con éxito! Te contactaremos pronto para coordinar la entrega.');
+                carrito = [];
+                actualizarCarrito();
+                guardarCarrito();
+                cerrarCarrito();
+            }
+        }
+
+        function cerrarSesion() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                localStorage.removeItem('usuarioLogueado');
+                localStorage.removeItem('usuario');
+                alert('Sesión cerrada correctamente');
+                window.location.href = '../index.html';
+            }
+        }
+
+        function mostrarNotificacion(mensaje) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--naranja);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = mensaje;
+            document.body.appendChild(notification);
+
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize all charts
+        function initializeCharts() {
+            // Sales Chart (Line Chart) - Principal
+            const salesCtx = document.getElementById('salesChart');
+            if (salesCtx) {
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        datasets: [{
+                            label: 'Ventas (M$)',
+                            data: [2.1, 2.8, 3.2, 2.9, 3.5, 4.1, 3.8, 4.3, 4.7, 4.2, 4.8, 5.2],
+                            borderColor: '#c76227',
+                            backgroundColor: 'rgba(199, 98, 39, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#c76227',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            pointHoverRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Ventas (Millones $)',
+                                    font: {
+                                        size: 12,
+                                        weight: 'bold'
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        }
+                    }
+                });
+            }
+
+            // Category Chart (Doughnut Chart)
+            const categoryCtx = document.getElementById('categoryChart');
+            if (categoryCtx) {
+                new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Canastos', 'Mochilas', 'Sombreros', 'Pulseras', 'Otras'],
+                        datasets: [{
+                            data: [35, 28, 20, 12, 5],
+                            backgroundColor: [
+                                '#c76227',
+                                '#24765d',
+                                '#3498db',
+                                '#9b59b6',
+                                '#e74c3c'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            // Artisan Chart (Bar Chart)
+            const artisanCtx = document.getElementById('artisanChart');
+            if (artisanCtx) {
+                new Chart(artisanCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Carlos M.', 'María G.', 'Ana R.', 'Luis T.', 'Carmen S.'],
+                        datasets: [{
+                            label: 'Ventas (M$)',
+                            data: [2.8, 2.3, 1.9, 1.6, 1.4],
+                            backgroundColor: '#c76227',
+                            borderRadius: 8,
+                            borderSkipped: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Ventas (Millones $)',
+                                    font: {
+                                        size: 12,
+                                        weight: 'bold'
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Conversion Chart (Line Chart)
+            const conversionCtx = document.getElementById('conversionChart');
+            if (conversionCtx) {
+                new Chart(conversionCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                        datasets: [{
+                            data: [2.8, 3.1, 2.9, 3.4, 3.2, 3.6, 3.8],
+                            borderColor: '#c76227',
+                            backgroundColor: 'rgba(199, 98, 39, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            pointBackgroundColor: '#c76227',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                display: false
+                            },
+                            x: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Ticket Chart (Line Chart)
+            const ticketCtx = document.getElementById('ticketChart');
+            if (ticketCtx) {
+                new Chart(ticketCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                        datasets: [{
+                            data: [78, 82, 85, 89, 87, 91, 88],
+                            borderColor: '#24765d',
+                            backgroundColor: 'rgba(36, 118, 93, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            pointBackgroundColor: '#24765d',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                display: false
+                            },
+                            x: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Chart filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart filter buttons
+            document.querySelectorAll('.chart-filter').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.chart-filter').forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Here you would update the chart data based on the selected period
+                    const period = this.getAttribute('data-period');
+                    console.log('Selected period:', period);
+                    // Update chart data logic would go here
+                });
+            });
+        });
+
+        // Event listeners del carrito
+        document.getElementById('cart-close').onclick = cerrarCarrito;
+        document.getElementById('btn-comprar').onclick = comprar;
+        document.getElementById('btn-continuar').onclick = cerrarCarrito;
+        cartOverlay.onclick = cerrarCarrito;
+        document.getElementById('btn-carrito').onclick = abrirCarrito;
+        document.getElementById('btn-logout').onclick = cerrarSesion;
+    </script>
+</body>
+</html>

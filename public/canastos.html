@@ -3,450 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artesanías Zenú - Tienda Virtual</title>
-    <style>
-        :root {
-            --marron: #804727;
-            --naranja: #c76227;
-            --naranja-oscuro: #864b13;
-            --verde: #24765d;
-            --gris-fondo: #f8f8f8;
-            --gris-tarjeta: #f4f1ee;
-            --blanco: #fff;
-            --gris-borde: #e0e0e0;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--gris-fondo);
-            color: #333;
-        }
-        /* HEADER SUPERIOR */
-        .header-top {
-            background: var(--marron);
-            color: #fff;
-            padding: 10px 0 0 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 18px;
-        }
-        .logo {
-            font-size: 2.1rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--naranja);
-            text-shadow: 1px 2px 8px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-        }
-        .logo span {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 400;
-            margin-left: 8px;
-        }
-        .search-bar {
-            flex: 1;
-            margin: 0 32px;
-            display: flex;
-            align-items: center;
-            max-width: 500px;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid var(--gris-borde);
-            border-radius: 6px 0 0 6px;
-            font-size: 1rem;
-            outline: none;
-        }
-        .search-bar button {
-            background: var(--naranja);
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 0 6px 6px 0;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        .search-bar button:hover {
-            background: var(--naranja-oscuro);
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .header-action {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.3rem;
-            cursor: pointer;
-            margin-left: 6px;
-            position: relative;
-            transition: color 0.2s;
-        }
-        .header-action:hover {
-            color: var(--naranja);
-        }
-        .header-action .badge {
-            position: absolute;
-            top: -6px;
-            right: -8px;
-            background: var(--naranja);
-            color: #fff;
-            border-radius: 50%;
-            font-size: 0.8rem;
-            padding: 2px 6px;
-            font-weight: bold;
-        }
-        /* MENÚ DE CATEGORÍAS */
-        .menu-categorias {
-            background: var(--naranja);
-            color: #fff;
-            padding: 0 0 0 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .categorias-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding: 0 18px;
-            overflow-x: auto;
-        }
-        .categoria-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.05rem;
-            padding: 16px 0 14px 0;
-            border-bottom: 2px solid transparent;
-            transition: border 0.2s, color 0.2s;
-            margin-right: 18px;
-            white-space: nowrap;
-        }
-        .categoria-link:hover, .categoria-link.active {
-            border-bottom: 2.5px solid var(--blanco);
-            color: var(--marron);
-        }
-        /* BANNER PRINCIPAL */
-        .banner {
-            background: linear-gradient(120deg, var(--naranja) 60%, var(--marron) 100%);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 260px;
-            margin: 32px auto 0 auto;
-            border-radius: 18px;
-            max-width: 1200px;
-            width: 94%;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
-            position: relative;
-            overflow: hidden;
-            padding: 0 40px;
-        }
-        .banner-text {
-            z-index: 2;
-            text-align: left;
-            max-width: 60%;
-        }
-        .banner h2 {
-            font-size: 2.3rem;
-            margin-bottom: 14px;
-            font-weight: 800;
-            text-shadow: 1px 2px 8px rgba(0,0,0,0.10);
-        }
-        .banner p {
-            font-size: 1.18rem;
-            font-weight: 400;
-        }
-        .banner-img {
-            width: 200px;
-            height: 200px;
-            background: rgba(255,255,255,0.13);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            font-size: 5rem;
-        }
-        /* BENEFICIOS */
-        .beneficios {
-            max-width: 1200px;
-            margin: 32px auto 0 auto;
-            width: 94%;
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .beneficio {
-            background: var(--blanco);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            padding: 18px 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex: 1 1 180px;
-            min-width: 180px;
-        }
-        .beneficio-icono {
-            font-size: 2rem;
-            color: var(--naranja);
-        }
-        .beneficio-texto {
-            font-size: 1.05rem;
-            color: #333;
-            font-weight: 500;
-        }
-        /* PRODUCTOS DESTACADOS */
-        .productos-destacados {
-            max-width: 1200px;
-            margin: 48px auto 0 auto;
-            width: 94%;
-        }
-        .productos-destacados h3 {
-            color: var(--marron);
-            font-size: 2rem;
-            margin-bottom: 32px;
-            text-align: left;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 36px;
-        }
-        .producto {
-            background-color: var(--blanco);
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(199,98,39,0.07);
-            padding: 28px 18px 22px 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: box-shadow 0.3s, transform 0.3s;
-            position: relative;
-            overflow: hidden;
-            min-height: 320px;
-        }
-        .producto:hover {
-            box-shadow: 0 8px 32px rgba(199,98,39,0.18);
-            transform: translateY(-8px) scale(1.03);
-        }
-        .producto-img {
-            width: 120px;
-            height: 120px;
-            background: #f0f2f5;
-            border-radius: 12px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            color: var(--naranja);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .producto-nombre {
-            font-size: 1.18rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #333;
-            text-align: center;
-        }
-        .producto-precio {
-            color: var(--verde);
-            font-size: 1.13rem;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-        .btn-comprar {
-            background: linear-gradient(90deg, var(--naranja) 70%, var(--naranja-oscuro) 100%);
-            color: #fff;
-            border: none;
-            padding: 12px 32px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.08rem;
-            box-shadow: 0 2px 8px rgba(199,98,39,0.10);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .btn-comprar:hover {
-            background: linear-gradient(90deg, var(--marron) 60%, var(--naranja) 100%);
-            transform: scale(1.07);
-        }
-        /* FOOTER */
-        footer {
-            background-color: var(--marron);
-            color: #fff;
-            text-align: center;
-            padding: 32px 0 18px 0;
-            margin-top: 64px;
-            border-top-left-radius: 18px;
-            border-top-right-radius: 18px;
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
-        }
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 18px;
-        }
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.05rem;
-            opacity: 0.85;
-            transition: color 0.2s, opacity 0.2s;
-        }
-        .footer-links a:hover {
-            color: var(--naranja);
-            opacity: 1;
-        }
-        .footer-social {
-            margin-bottom: 10px;
-        }
-        .footer-social a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #fff;
-            font-size: 1.5rem;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-        .footer-social a:hover {
-            opacity: 1;
-            color: var(--naranja);
-        }
-        @media (max-width: 900px) {
-            .header-container, .categorias-container, .banner, .beneficios, .productos-destacados {
-                max-width: 98vw;
-            }
-            .banner {
-                flex-direction: column;
-                min-height: 180px;
-                padding: 24px 10px;
-            }
-            .banner-text {
-                max-width: 100%;
-                text-align: center;
-            }
-            .banner-img {
-                margin: 18px auto 0 auto;
-            }
-            .beneficios {
-                flex-direction: column;
-                gap: 12px;
-            }
-        }
-        @media (max-width: 700px) {
-            .header-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .search-bar {
-                margin: 10px 0;
-                max-width: 98vw;
-            }
-            .categorias-container {
-                gap: 10px;
-                padding: 0 4px;
-            }
-            .productos-grid {
-                gap: 18px;
-            }
-            .producto {
-                min-height: 240px;
-                padding: 18px 6px 16px 6px;
-            }
-        }
-    </style>
-    <style>
-        /* MODAL */
-        .modal-bg {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.35);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        .modal-bg.active {
-            display: flex;
-        }
-        .modal-content {
-            background: none;
-            border: none;
-            box-shadow: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 340px;
-            max-width: 95vw;
-            max-height: 95vh;
-            overflow-y: auto;
-        }
-        .modal-close {
-            position: absolute;
-            top: 18px;
-            right: 24px;
-            font-size: 2rem;
-            color: #804727;
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 10001;
-            font-weight: bold;
-            transition: color 0.2s;
-        }
-        .modal-close:hover {
-            color: #c76227;
-        }
-        .modal-content .conten_gen {
-            margin: 0;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-            max-width: 420px;
-            min-width: 320px;
-            width: 100%;
-        }
-        @media (max-width: 600px) {
-            .modal-content .conten_gen {
-                flex-direction: column;
-                min-width: 0;
-                max-width: 98vw;
-                padding: 0;
-            }
-            .modal-content .conten_izquierdo {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Canastos Zenú - Artesanías Zenú</title>
 </head>
 <body>
     <!-- HEADER SUPERIOR -->
@@ -454,11 +12,14 @@
         <div class="header-container">
             <div class="logo">Artesanías Zenú <span>• Tienda Virtual</span></div>
             <form class="search-bar" onsubmit="event.preventDefault(); alert('Búsqueda: ' + this.query.value);">
-                <input type="text" name="query" placeholder="Buscar productos, categorías..." autocomplete="off">
+                <input type="text" name="query" placeholder="Buscar canastos..." autocomplete="off">
                 <button type="submit">🔍</button>
             </form>
             <div class="header-actions">
-                <button class="header-action" id="btn-notificaciones" title="Notificaciones">🔔</button>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span class="welcome-text">¡Hola, <span id="user-name">Usuario</span>!</span>
+                    <button class="header-action logout-btn" id="btn-logout" title="Cerrar sesión">🚪</button>
+                </div>
                 <button class="header-action" id="btn-cuenta" title="Mi cuenta">👤</button>
                 <button class="header-action" id="btn-carrito" title="Carrito">
                     🛒<span class="badge" id="carrito-badge">0</span>
@@ -466,283 +27,692 @@
             </div>
         </div>
     </div>
+
     <!-- MENÚ DE CATEGORÍAS -->
     <nav class="menu-categorias">
         <div class="categorias-container">
-            <a href="./index.html" class="categoria-link active">Inicio</a>
-            <a href="./canastos.html" class="categoria-link">Canastos</a>
+            <a href="./index.html" class="categoria-link">Inicio</a>
+            <a href="./canastos.html" class="categoria-link active">Canastos</a>
             <a href="./mochilas.html" class="categoria-link">Mochilas</a>
             <a href="./sombreros.html" class="categoria-link">Sombreros</a>
             <a href="./pulseras.html" class="categoria-link">Pulseras</a>
             <a href="./ofertas.html" class="categoria-link">Ofertas</a>
         </div>
     </nav>
+
     <!-- BANNER PRINCIPAL -->
     <section class="banner">
         <div class="banner-text">
-            <h2>¡Bienvenido a Artesanías Zenú!</h2>
-            <p>Descubre la riqueza cultural y la belleza de nuestras artesanías hechas a mano. Apoya el arte local y lleva a casa piezas únicas llenas de historia.</p>
+            <h2>Canastos Zenú</h2>
+            <p>Descubre la belleza y funcionalidad de nuestros canastos artesanales, elaborados con técnicas ancestrales de la cultura Zenú. Cada pieza cuenta una historia única.</p>
         </div>
         <div class="banner-img">🧺</div>
     </section>
+
     <!-- BENEFICIOS -->
     <section class="beneficios">
         <div class="beneficio">
-            <span class="beneficio-icono">🛡️</span>
-            <span class="beneficio-texto">Compras seguras</span>
+            <span class="beneficio-icono">✨</span>
+            <span class="beneficio-texto">Hechos a mano</span>
         </div>
         <div class="beneficio">
-            <span class="beneficio-icono">🏆</span>
-            <span class="beneficio-texto">Artesanía premiada</span>
+            <span class="beneficio-icono">🌿</span>
+            <span class="beneficio-texto">Materiales naturales</span>
         </div>
         <div class="beneficio">
-            <span class="beneficio-icono">💳</span>
-            <span class="beneficio-texto">Paga en línea o en efectivo</span>
+            <span class="beneficio-icono">🎨</span>
+            <span class="beneficio-texto">Diseños únicos</span>
         </div>
         <div class="beneficio">
             <span class="beneficio-icono">🚚</span>
-            <span class="beneficio-texto">Envíos a todo el país</span>
+            <span class="beneficio-texto">Envíos nacionales</span>
         </div>
-        <div class="beneficio">
-            <span class="beneficio-icono">🎁</span>
-            <span class="beneficio-texto">Promociones y descuentos</span>
+    </section>
+
+    <!-- FILTROS Y ORDENAMIENTO -->
+    <section class="filtros-section">
+        <div class="filtros-container">
+            <div class="filtros-left">
+                <span class="filtros-title">Filtrar por:</span>
+                <select class="filtro-select" id="filtro-tamaño">
+                    <option value="">Todos los tamaños</option>
+                    <option value="pequeño">Pequeño</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
+                    <option value="familiar">Familiar</option>
+                </select>
+                <select class="filtro-select" id="filtro-precio">
+                    <option value="">Todos los precios</option>
+                    <option value="0-50000">$0 - $50.000</option>
+                    <option value="50000-100000">$50.000 - $100.000</option>
+                    <option value="100000-200000">$100.000 - $200.000</option>
+                    <option value="200000+">$200.000+</option>
+                </select>
+            </div>
+            <div class="filtros-right">
+                <span class="filtros-title">Ordenar por:</span>
+                <select class="filtro-select" id="ordenar-por">
+                    <option value="nombre">Nombre</option>
+                    <option value="precio-asc">Precio: Menor a Mayor</option>
+                    <option value="precio-desc">Precio: Mayor a Menor</option>
+                    <option value="popularidad">Más populares</option>
+                </select>
+            </div>
         </div>
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canastos Zenú</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: #fff8f0;
-            color: #333;
-        }
-        header {
-            width: 100%;
-            background-color: #c76227;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-        }
-        main {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-        .producto {
-            background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .producto:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        .producto img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .producto h2 {
-            font-size: 1.4rem;
-            margin: 0;
-            padding: 1rem;
-            background-color: #c76227;
-            color: white;
-        }
-        .producto p {
-            padding: 1rem;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.5;
-        }
-       footer {
-                    width: 100%;
-                    background-color: #c76227;
-                    color: white;
-                    text-align: center;
-                    padding: 1rem;
-                    margin-top: 2rem;
-                    font-size: 0.9rem;
-                }
-    </style>
-</head>
-<body>
+    </section>
 
-    <header>
-        <h1>Canastos Zenú</h1>
-        <p>Artesanías únicas hechas a mano por comunidades indígenas Zenú</p>
-    </header>
-
-    <main>
-        <div class="producto">
-            <img src="./image/canastos 3.jpg" alt="Panera">
-            <h2>Panera</h2>
-            <p>Canasto tejido con caña flecha, una fibra natural utilizada por la cultura Zenú para elaborar sus artesanías.</p>
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="productos-destacados">
+        <h2>Nuestra Colección de Canastos</h2>
+        <div class="productos-grid" id="productos-grid">
+            <!-- Los productos se cargarán dinámicamente -->
         </div>
+    </section>
 
-        <div class="producto">
-            <img src="./image/canastos 2.jpg" alt="Canasto sin Tapa">
-            <h2>Canasto sin Tapa</h2>
-            <p>Canasto tejido a mano, elaborado con hojas de milpesos, tejido en espiral, se utiliza principalmente para transportar frutas y alimentos.</p>
-        </div>
-
-        <div class="producto">
-            <img src="./image/canasto 6.jpeg" alt="Canasto Tapa Café">
-            <h2>Canasto Tapa Café</h2>
-            <p>Canasto artesanal tradicional, elaborado con la técnica del tejido en espiral utilizando fibras de caña flecha. Este tipo de canasto se caracteriza por su tapa.</p>
-        </div>
-
-        <div class="producto">
-            <img src="./image/canastos 3.jpg" alt="Canasto Redondo">
-            <h2>Canasto Redondo</h2>
-            <p>Canasto tejid a mano, utilizando la técnica de espiral con fibras de caña flecha, y a menudo decorada con patrones o "pintas" que representan la identidad y cosmovisión Zenú.a.</p>
-        </div>
-
-        <div class="producto">
-            <img src="./image/Canasto 4.jpg" alt="Canasto Cuadrado">
-            <h2>Canasto Cuadrado</h2>
-            <p>Canasto Artesanal tradicional elaborado con la técnica de tejeduría en caña flecha, que se caracteriza por su forma cuadrada y su uso de patrones o "pintas" que representan elementos de la cultura Zenú.</p>
-        </div>
-
-        <div class="producto">
-            <img src="./image/canasto 5.jpg" alt="Canasto Playero">
-            <h2>Canasto Playero</h2>
-            <p>artesanal elaborada con la técnica tradicional del trenzado en caña flecha, característica de la cultura Zenú en Colombia. Estos canastos, inspirados en el sombrero vueltiao, son elaborados por artesanos que heredan y transmiten las técnicas y diseños ancestrales de su cultura</p>
-        </div>
-    </main>
-
-    <footer>
-        © 2025 Canastos Zenú - Todos los derechos reservados
-    </footer>
-
-</body>
-</html>
-    <!-- MODAL LOGIN/REGISTRO/OLVIDO -->
+    <!-- MODAL DE AUTENTICACIÓN -->
     <div class="modal-bg" id="modal-bg">
         <div class="modal-content" id="modal-content">
-            <button class="modal-close" id="modal-close">&times;</button>
-            <!-- Aquí se insertará el formulario correspondiente -->
+            <!-- El contenido del modal se cargará dinámicamente -->
         </div>
     </div>
+
+    <!-- CARRITO DESLIZABLE -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-slide" id="cart-slide">
+        <div class="cart-header">
+            <h3>Mi Carrito</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <!-- Los productos del carrito se cargarán dinámicamente -->
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Subtotal:</span>
+                    <span class="cart-summary-value" id="cart-subtotal">$0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Envío:</span>
+                    <span class="cart-summary-value" id="cart-shipping">Gratis</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Total:</span>
+                    <span class="cart-summary-value" id="cart-total-summary">$0</span>
+                </div>
+            </div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cart-total">$0</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-comprar" id="btn-comprar" disabled>Comprar Ahora</button>
+                <button class="btn-continuar" id="btn-continuar">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-links">
-            <a href="contactenos.html">Contáctanos</a>
-            <a href="#">Centro de ayudas</a>
-            <a href="#">Política de privacidad</a>
-            <a href="#">Términos y condiciones</a>
+            <a href="./nosotros.html">Nosotros</a>
+            <a href="./index.html">Inicio</a>
+            <a href="./canastos.html">Canastos</a>
+            <a href="./mochilas.html">Mochilas</a>
+            <a href="./sombreros.html">Sombreros</a>
+            <a href="./pulseras.html">Pulseras</a>
+            <a href="./ofertas.html">Ofertas</a>
         </div>
         <div class="footer-social">
-            <a href="#" title="Instagram">&#x1F4F7;</a>
-            <a href="#" title="Facebook">&#x1F426;</a>
-            <a href="#" title="WhatsApp">&#x1F4F2;</a>
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="WhatsApp">📱</a>
+            <a href="#" title="Email">📧</a>
         </div>
-       
+        <p>&copy; 2024 Artesanías Zenú. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="./js/carrito.js"></script>
     <script>
-    // MODAL LOGIN/REGISTRO/OLVIDO
-    const loginForm = `
-    <div class='conten_gen'>
-      <div class='tex'>
-        <h3>Hola de nuevo</h3>
-        <p>Bienvenido</p>
-        <input type='text' placeholder='Ingresar tu usuario'>
-        <input type='password' placeholder='Ingresar tu contraseña'>
-        <a href='backend/dasboard.html'>
-          <button type='button' class='btn_ingresar'>Ingresar</button>
-        </a>
-        <p>
-          <a href='#' id='modal-registro-link'>Registrarse</a> |
-          <a href='#' id='modal-olvido-link'>¿Olvidaste tu contraseña?</a>
-        </p>
-      </div>
-      <div class='conten_izquierdo'>
-        <h2>Artesanos tejiendo para crecer</h2>
-      </div>
-    </div>`;
-    const registroForm = `
-    <div class='conten_gen'>
-      <div class='tex'>
-        <h3>Registro</h3>
-        <p>¡Crea tu cuenta!</p>
-        <input type='text' placeholder='Ingresar tu usuario'>
-        <input type='password' placeholder='Ingresar tu contraseña'>
-        <input type='number' placeholder='Ingresa tu número'>
-        <button type='button' class='btn_ingresar'>Registrarse</button>
-      </div>
-      <div class='conten_izquierdo'>
-        <img src='#' alt='logo proyecto'>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
-      </div>
-    </div>`;
-    const olvidoForm = `
-    <div class='conten_gen'>
-      <div class='tex'>
-        <h3>Recuperar contraseña</h3>
-        <p>Escribe tu correo</p>
-        <input type='email' placeholder='Ingresa tu email'>
-        <button type='button' class='btn_ingresar'>Enviar</button>
-      </div>
-      <div class='conten_izquierdo'>
-        <img src='#' alt='logo proyecto'>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
-      </div>
-    </div>`;
+    // DATOS DE PRODUCTOS
+    const productos = [
+        {
+            id: 1,
+            nombre: "Canasto Tradicional Pequeño",
+            descripcion: "Canasto tradicional Zenú elaborado en caña flecha. Perfecto para almacenar objetos pequeños o como decoración. Técnicas ancestrales preservadas.",
+            precio: 35000,
+            imagen: "./Canasto Pequeño.jpg",
+            icono: "🧺",
+            tamaño: "pequeño",
+            popularidad: 5,
+            stock: 12
+        },
+        {
+            id: 2,
+            nombre: "Canasto Mediano Multiuso",
+            descripcion: "Canasto mediano ideal para múltiples usos. Elaborado con materiales naturales y técnicas tradicionales. Resistente y duradero.",
+            precio: 65000,
+            imagen: "./Canasto Mediano.jpg",
+            icono: "🧺",
+            tamaño: "mediano",
+            popularidad: 4,
+            stock: 8
+        },
+        {
+            id: 3,
+            nombre: "Canasto Grande Familiar",
+            descripcion: "Canasto grande perfecto para uso familiar. Diseño tradicional con capacidad amplia. Ideal para almacenar ropa o alimentos.",
+            precio: 120000,
+            imagen: "./Canasto Grande.jpg",
+            icono: "🧺",
+            tamaño: "grande",
+            popularidad: 4,
+            stock: 6
+        },
+        {
+            id: 4,
+            nombre: "Canasto Decorativo",
+            descripcion: "Canasto con diseños especiales para decoración. Colores naturales y patrones únicos. Perfecto para centros de mesa o estanterías.",
+            precio: 45000,
+            imagen: "./Canasto Decorativo.jpg",
+            icono: "🧺",
+            tamaño: "pequeño",
+            popularidad: 3,
+            stock: 15
+        },
+        {
+            id: 5,
+            nombre: "Canasto de Cosecha",
+            descripcion: "Canasto especial para cosecha de frutas y verduras. Diseño funcional que mantiene la tradición Zenú. Resistente y práctico.",
+            precio: 85000,
+            imagen: "./Canasto Cosecha.jpg",
+            icono: "🧺",
+            tamaño: "mediano",
+            popularidad: 5,
+            stock: 10
+        },
+        {
+            id: 6,
+            nombre: "Canasto Familiar Jumbo",
+            descripcion: "Canasto extra grande para familias numerosas. Elaborado con las mejores técnicas artesanales. Capacidad máxima y durabilidad garantizada.",
+            precio: 180000,
+            imagen: "./Canasto Jumbo.jpg",
+            icono: "🧺",
+            tamaño: "familiar",
+            popularidad: 3,
+            stock: 4
+        }
+    ];
+
+    // VARIABLES GLOBALES
+    let carrito = JSON.parse(localStorage.getItem('carritoArtesanias')) || [];
+    let productosFiltrados = [...productos];
+
+    // ELEMENTOS DEL DOM
     const modalBg = document.getElementById('modal-bg');
     const modalContent = document.getElementById('modal-content');
-    const modalClose = document.getElementById('modal-close');
+    const productosGrid = document.getElementById('productos-grid');
+
+    // Cargar carrito al iniciar la página
+    cargarCarrito();
+    const userInfo = document.getElementById('user-info');
+    const userName = document.getElementById('user-name');
+
+    // FORMULARIOS DE MODAL
+    const loginForm = `
+    <div class='conten_gen'>
+        <div class='tex'>
+            <h3>Hola de nuevo</h3>
+            <p>Bienvenido</p>
+            <input type='text' placeholder='Ingresar tu usuario' id='login-usuario'>
+            <input type='password' placeholder='Ingresar tu contraseña' id='login-contraseña'>
+            <button type='button' class='btn_ingresar' onclick='iniciarSesion()'>Ingresar</button>
+            <p>
+                <a href='#' id='modal-registro-link'>Registrarse</a> |
+                <a href='#' id='modal-olvido-link'>¿Olvidaste tu contraseña?</a>
+            </p>
+        </div>
+        <div class='conten_izquierdo'>
+            <h2>Artesanos tejiendo para crecer</h2>
+            <p>Únete a nuestra comunidad y descubre la belleza de las artesanías Zenú</p>
+        </div>
+    </div>`;
+
+    const registroForm = `
+    <div class='conten_gen'>
+        <div class='tex'>
+            <h3>Crear cuenta</h3>
+            <p>Únete a nuestra comunidad</p>
+            <input type='text' placeholder='Nombre de usuario' id='reg-usuario'>
+            <input type='email' placeholder='Correo electrónico' id='reg-email'>
+            <input type='password' placeholder='Contraseña' id='reg-contraseña'>
+            <button type='button' class='btn_ingresar' onclick='registrarUsuario()'>Registrarse</button>
+            <p>
+                <a href='#' id='modal-login-link'>¿Ya tienes cuenta? Inicia sesión</a>
+            </p>
+        </div>
+        <div class='conten_izquierdo'>
+            <h2>Bienvenido a la familia Zenú</h2>
+            <p>Forma parte de nuestra comunidad y apoya el arte ancestral</p>
+        </div>
+    </div>`;
+
+    const olvidoForm = `
+    <div class='conten_gen'>
+        <div class='tex'>
+            <h3>Recuperar contraseña</h3>
+            <p>Ingresa tu email para recuperar tu cuenta</p>
+            <input type='email' placeholder='Correo electrónico' id='olvido-email'>
+            <button type='button' class='btn_ingresar' onclick='recuperarContraseña()'>Enviar enlace</button>
+            <p>
+                <a href='#' id='modal-login-link-olvido'>¿Recordaste tu contraseña? Inicia sesión</a>
+            </p>
+        </div>
+        <div class='conten_izquierdo'>
+            <h2>No te preocupes</h2>
+            <p>Te ayudamos a recuperar el acceso a tu cuenta</p>
+        </div>
+    </div>`;
+
+    // FUNCIONES DE INICIALIZACIÓN
+    function init() {
+        cargarProductos();
+        verificarUsuarioLogueado();
+        configurarEventListeners();
+    }
+
+    function cargarProductos() {
+        productosGrid.innerHTML = '';
+        productosFiltrados.forEach(producto => {
+            const productoElement = crearElementoProducto(producto);
+            productosGrid.appendChild(productoElement);
+        });
+    }
+
+    function crearElementoProducto(producto) {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML = `
+            <div class="producto-imagen">
+                <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjVGNUY1Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5OTk5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlbiBubyBkaXNwb25pYmxlPC90ZXh0Pgo8L3N2Zz4K'">
+            </div>
+            <div class="producto-info">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.descripcion}</p>
+                <div class="producto-precio">$${producto.precio.toLocaleString()}</div>
+                <div class="producto-stock">Stock: ${producto.stock} unidades</div>
+                <button class="btn-agregar" onclick="agregarCarrito('${producto.nombre}')">
+                    Agregar al carrito
+                </button>
+            </div>
+        `;
+        return div;
+    }
+
+    function verificarUsuarioLogueado() {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        if (usuarioLogueado) {
+            const usuario = localStorage.getItem('usuario') || 'Usuario';
+            userName.textContent = usuario;
+            userInfo.style.display = 'flex';
+        }
+    }
+
+    function configurarEventListeners() {
+        // Botón de cuenta
+        document.getElementById('btn-cuenta').onclick = function() {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (usuarioLogueado) {
+                alert('Ya estás logueado como: ' + localStorage.getItem('usuario'));
+            } else {
+                openModal(loginForm);
+            }
+        };
+
+        // Botón de carrito
+        document.getElementById('btn-carrito').onclick = abrirCarrito;
+
+        // Botón de logout
+        document.getElementById('btn-logout').onclick = function() {
+            localStorage.removeItem('usuarioLogueado');
+            localStorage.removeItem('usuario');
+            userInfo.style.display = 'none';
+            alert('Sesión cerrada correctamente');
+        };
+
+        // Filtros
+        document.getElementById('filtro-tamaño').onchange = aplicarFiltros;
+        document.getElementById('filtro-precio').onchange = aplicarFiltros;
+        document.getElementById('ordenar-por').onchange = aplicarFiltros;
+    }
+
+    function aplicarFiltros() {
+        const filtroTamaño = document.getElementById('filtro-tamaño').value;
+        const filtroPrecio = document.getElementById('filtro-precio').value;
+        const ordenarPor = document.getElementById('ordenar-por').value;
+
+        // Filtrar por tamaño
+        productosFiltrados = productos.filter(producto => {
+            if (filtroTamaño && producto.tamaño !== filtroTamaño) return false;
+            return true;
+        });
+
+        // Filtrar por precio
+        if (filtroPrecio) {
+            const [min, max] = filtroPrecio.split('-').map(p => p === '200000+' ? Infinity : parseInt(p));
+            productosFiltrados = productosFiltrados.filter(producto => {
+                if (max === Infinity) return producto.precio >= min;
+                return producto.precio >= min && producto.precio <= max;
+            });
+        }
+
+        // Ordenar
+        productosFiltrados.sort((a, b) => {
+            switch (ordenarPor) {
+                case 'nombre':
+                    return a.nombre.localeCompare(b.nombre);
+                case 'precio-asc':
+                    return a.precio - b.precio;
+                case 'precio-desc':
+                    return b.precio - a.precio;
+                case 'popularidad':
+                    return b.popularidad - a.popularidad;
+                default:
+                    return 0;
+            }
+        });
+
+        cargarProductos();
+    }
+
+    // FUNCIONES DE MODAL
     function openModal(content) {
-      modalContent.innerHTML = `<button class='modal-close' id='modal-close'>&times;</button>` + content;
-      modalBg.classList.add('active');
-      setTimeout(() => {
-        document.getElementById('modal-close').onclick = closeModal;
-        const reg = document.getElementById('modal-registro-link');
-        if(reg) reg.onclick = (e) => { e.preventDefault(); openModal(registroForm); };
-        const olv = document.getElementById('modal-olvido-link');
-        if(olv) olv.onclick = (e) => { e.preventDefault(); openModal(olvidoForm); };
-      }, 10);
+        modalContent.innerHTML = `<button class='modal-close' id='modal-close'>&times;</button>` + content;
+        modalBg.classList.add('active');
+        setTimeout(() => {
+            document.getElementById('modal-close').onclick = closeModal;
+            const reg = document.getElementById('modal-registro-link');
+            if(reg) reg.onclick = (e) => { e.preventDefault(); openModal(registroForm); };
+            const olv = document.getElementById('modal-olvido-link');
+            if(olv) olv.onclick = (e) => { e.preventDefault(); openModal(olvidoForm); };
+            const loginFromReg = document.getElementById('modal-login-link');
+            if(loginFromReg) loginFromReg.onclick = (e) => { e.preventDefault(); openModal(loginForm); };
+            const loginFromOlv = document.getElementById('modal-login-link-olvido');
+            if(loginFromOlv) loginFromOlv.onclick = (e) => { e.preventDefault(); openModal(loginForm); };
+        }, 10);
     }
+
     function closeModal() {
-      modalBg.classList.remove('active');
-      setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+        modalBg.classList.remove('active');
     }
-    document.getElementById('btn-cuenta').onclick = (e) => { e.preventDefault(); openModal(loginForm); };
-    // Cerrar modal al hacer click fuera del contenido
-    modalBg.onclick = function(e) {
-      if(e.target === modalBg) closeModal();
-    };
-    modalClose.onclick = closeModal;
-    // CARRITO (funcionalidad básica)
-    let carrito = [];
-    function agregarCarrito(producto) {
-        carrito.push(producto);
-        document.getElementById('carrito-badge').textContent = carrito.length;
-        alert('Producto agregado: ' + producto);
-    }
-    document.getElementById('btn-carrito').onclick = function() {
-        if(carrito.length === 0) {
-            alert('No tienes productos en tu carrito');
+
+    // FUNCIONES DE CARRITO DESLIZABLE
+    function agregarCarrito(nombreProducto) {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        
+        if (!usuarioLogueado) {
+            openModal(loginForm);
+            return;
+        }
+
+        // Buscar el producto en la lista
+        const producto = productos.find(p => p.nombre === nombreProducto);
+        if (!producto) return;
+
+        // Verificar si ya existe en el carrito
+        const itemExistente = carrito.find(item => item.id === producto.id);
+        
+        if (itemExistente) {
+            itemExistente.cantidad += 1;
         } else {
-            alert('Productos en tu carrito:\n' + carrito.join('\n'));
+            carrito.push({
+                ...producto,
+                cantidad: 1
+            });
+        }
+
+        actualizarCarritoCompleto();
+        guardarCarrito();
+        mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+    }
+
+    function actualizarCarrito() {
+        // Actualizar badge
+        const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+        document.getElementById('carrito-badge').textContent = totalItems;
+
+        // Actualizar contenido del carrito
+        if (carrito.length === 0) {
+            document.getElementById('cart-content').innerHTML = `
+                <div class="cart-empty">
+                    <div class="cart-empty-icon">🛒</div>
+                    <h4>Tu carrito está vacío</h4>
+                    <p>Descubre nuestras hermosas artesanías Zenú y agrega algunos productos para comenzar tu compra</p>
+                    <button class="btn-explorar" onclick="cerrarCarrito()">Explorar Productos</button>
+                </div>
+            `;
+            document.getElementById('btn-comprar').disabled = true;
+            document.getElementById('cart-total').textContent = '$0';
+            document.getElementById('cart-summary').style.display = 'none';
+        } else {
+            document.getElementById('cart-content').innerHTML = carrito.map(item => {
+                const subtotal = item.precio * item.cantidad;
+                return `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image">
+                            <img src="${item.imagen}" alt="${item.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div class="fallback-icon" style="display: none;">${item.icono}</div>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.nombre}</div>
+                            <div class="cart-item-description">${item.descripcion}</div>
+                            <div class="cart-item-price-container">
+                                <div class="cart-item-price">$${item.precio.toLocaleString()}</div>
+                                <div class="cart-item-subtotal">Subtotal: $${subtotal.toLocaleString()}</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <span class="quantity-label">Cantidad:</span>
+                                <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                                <span class="quantity-display">${item.cantidad}</span>
+                                <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="eliminarItem(${item.id})" title="Eliminar del carrito">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+
+            // Calcular totales
+            const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000; // Envío gratis sobre $100k
+            const total = subtotal + shipping;
+
+            // Actualizar resumen
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+            document.getElementById('cart-shipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString()}`;
+            document.getElementById('cart-total-summary').textContent = `$${total.toLocaleString()}`;
+            document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+            
+            // Mostrar resumen
+            document.getElementById('cart-summary').style.display = 'block';
+            document.getElementById('btn-comprar').disabled = false;
+        }
+    }
+
+    function cambiarCantidad(id, cambio) {
+        const item = carrito.find(item => item.id === id);
+        if (!item) return;
+
+        item.cantidad += cambio;
+        
+        if (item.cantidad <= 0) {
+            eliminarItem(id);
+        } else {
+            actualizarCarritoCompleto();
+            guardarCarrito();
+        }
+    }
+
+    function eliminarItem(id) {
+        carrito = carrito.filter(item => item.id !== id);
+        actualizarCarritoCompleto();
+        guardarCarrito();
+    }
+
+    function abrirCarrito() {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        
+        if (!usuarioLogueado) {
+            openModal(loginForm);
+            return;
+        }
+
+        document.getElementById('cart-overlay').classList.add('active');
+        document.getElementById('cart-slide').classList.add('active');
+        actualizarCarrito();
+    }
+
+    function cerrarCarrito() {
+        document.getElementById('cart-overlay').classList.remove('active');
+        document.getElementById('cart-slide').classList.remove('active');
+    }
+
+    function comprar() {
+        if (carrito.length === 0) return;
+
+        const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        const shipping = subtotal > 100000 ? 0 : 15000;
+        const total = subtotal + shipping;
+        
+        const resumen = carrito.map(item => 
+            `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}`
+        ).join('\n');
+
+        const confirmacion = `¿Confirmar compra?\n\n${resumen}\n\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'Gratis' : '$' + shipping.toLocaleString()}\n\nTOTAL: $${total.toLocaleString()}`;
+
+        if (confirm(confirmacion)) {
+            alert('¡Compra realizada con éxito! Te contactaremos pronto para coordinar la entrega.');
+            carrito = [];
+            actualizarCarritoCompleto();
+            guardarCarrito();
+            cerrarCarrito();
+        }
+    }
+
+    function mostrarNotificacion(mensaje) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--naranja);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        `;
+        notification.textContent = mensaje;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // FUNCIONES DE AUTENTICACIÓN
+    function iniciarSesion() {
+        const usuario = document.getElementById('login-usuario').value;
+        const contraseña = document.getElementById('login-contraseña').value;
+
+        if (!usuario || !contraseña) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+        
+        // Simulación de login (aquí iría la lógica real de autenticación)
+        if (usuario === 'admin' && contraseña === 'admin') {
+            // Guardar estado de login en localStorage
+            localStorage.setItem('usuarioLogueado', 'true');
+            localStorage.setItem('usuario', usuario);
+            alert('¡Bienvenido! Redirigiendo al dashboard...');
+            closeModal();
+            window.location.href = './dashboard/dashboard.html';
+        } else {
+            alert('Usuario o contraseña incorrectos');
+        }
+    }
+    
+    function registrarUsuario() {
+        const usuario = document.getElementById('reg-usuario').value;
+        const email = document.getElementById('reg-email').value;
+        const contraseña = document.getElementById('reg-contraseña').value;
+
+        if (!usuario || !email || !contraseña) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+        
+        // Validación básica de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor ingresa un email válido');
+            return;
+        }
+        
+        // Simulación de registro (aquí iría la lógica real de registro)
+        // Guardar estado de login en localStorage
+        localStorage.setItem('usuarioLogueado', 'true');
+        localStorage.setItem('usuario', usuario);
+        alert('¡Registro exitoso! Ya estás logueado');
+        closeModal();
+    }
+    
+    function recuperarContraseña() {
+        const email = document.getElementById('olvido-email').value;
+        
+        if (!email) {
+            alert('Por favor ingresa tu email');
+            return;
+        }
+        
+        // Validación básica de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor ingresa un email válido');
+            return;
+        }
+        
+        // Simulación de recuperación (aquí iría la lógica real de recuperación)
+        alert('Se ha enviado un enlace de recuperación a tu email');
+        openModal(loginForm);
+    }
+
+    // Cerrar modal al hacer clic fuera
+    modalBg.onclick = function(e) {
+        if (e.target === modalBg) {
+            closeModal();
         }
     };
-    // Notificaciones (simulado)
-    document.getElementById('btn-notificaciones').onclick = function() {
-        alert('No tienes notificaciones nuevas.');
-    };
+
+    // Event listeners del carrito
+    document.getElementById('cart-close').onclick = cerrarCarrito;
+    document.getElementById('btn-comprar').onclick = comprar;
+    document.getElementById('btn-continuar').onclick = cerrarCarrito;
+    document.getElementById('cart-overlay').onclick = cerrarCarrito;
+
+    // Inicializar la aplicación
+    init();
     </script>
 </body>
 </html>

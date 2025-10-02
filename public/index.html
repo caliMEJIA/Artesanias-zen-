@@ -17,6 +17,10 @@
                 <button type="submit">🔍</button>
             </form>
             <div class="header-actions">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span class="welcome-text">¡Hola, <span id="user-name">Usuario</span>!</span>
+                    <button class="header-action logout-btn" id="btn-logout" title="Cerrar sesión">🚪</button>
+                </div>
                 <button class="header-action" id="btn-cuenta" title="Mi cuenta">👤</button>
                 <button class="header-action" id="btn-carrito" title="Carrito">
                     🛒<span class="badge" id="carrito-badge">0</span>
@@ -103,6 +107,42 @@
             <!-- Aquí se insertará el formulario correspondiente -->
         </div>
     </div>
+
+    <!-- CARRITO DESLIZABLE -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-slide" id="cart-slide">
+        <div class="cart-header">
+            <h3>Mi Carrito</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <!-- Los productos del carrito se cargarán dinámicamente -->
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Subtotal:</span>
+                    <span class="cart-summary-value" id="cart-subtotal">$0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Envío:</span>
+                    <span class="cart-summary-value" id="cart-shipping">Gratis</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span class="cart-summary-label">Total:</span>
+                    <span class="cart-summary-value" id="cart-total-summary">$0</span>
+                </div>
+            </div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cart-total">$0</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-comprar" id="btn-comprar" disabled>Comprar Ahora</button>
+                <button class="btn-continuar" id="btn-continuar">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
     <!-- FOOTER -->
     <footer>
         <div class="footer-links">
@@ -120,6 +160,7 @@
         </div>
         &copy; 2024 Artesanías Zenú. Todos los derechos reservados.
     </footer>
+    <script src="./js/carrito.js"></script>
     <script>
     // MODAL LOGIN/REGISTRO/OLVIDO
     const loginForm = `
@@ -127,11 +168,9 @@
       <div class='tex'>
         <h3>Hola de nuevo</h3>
         <p>Bienvenido</p>
-        <input type='text' placeholder='Ingresar tu usuario'>
-        <input type='password' placeholder='Ingresar tu contraseña'>
-        <a href='backend/dasboard.html'>
-          <button type='button' class='btn_ingresar'>Ingresar</button>
-        </a>
+        <input type='text' placeholder='Ingresar tu usuario' id='login-usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña' id='login-contraseña'>
+        <button type='button' class='btn_ingresar' onclick='iniciarSesion()'>Ingresar</button>
         <p>
           <a href='#' id='modal-registro-link'>Registrarse</a> |
           <a href='#' id='modal-olvido-link'>¿Olvidaste tu contraseña?</a>
@@ -139,34 +178,44 @@
       </div>
       <div class='conten_izquierdo'>
         <h2>Artesanos tejiendo para crecer</h2>
+        <p>Únete a nuestra comunidad y descubre la belleza de las artesanías Zenú</p>
       </div>
     </div>`;
+    
     const registroForm = `
     <div class='conten_gen'>
       <div class='tex'>
         <h3>Registro</h3>
         <p>¡Crea tu cuenta!</p>
-        <input type='text' placeholder='Ingresar tu usuario'>
-        <input type='password' placeholder='Ingresar tu contraseña'>
-        <input type='number' placeholder='Ingresa tu número'>
-        <button type='button' class='btn_ingresar'>Registrarse</button>
+        <input type='text' placeholder='Ingresar tu usuario' id='reg-usuario'>
+        <input type='password' placeholder='Ingresar tu contraseña' id='reg-contraseña'>
+        <input type='email' placeholder='Ingresa tu email' id='reg-email'>
+        <input type='number' placeholder='Ingresa tu número' id='reg-telefono'>
+        <button type='button' class='btn_ingresar' onclick='registrarUsuario()'>Registrarse</button>
+        <p>
+          <a href='#' id='modal-login-link'>¿Ya tienes cuenta? Inicia sesión</a>
+        </p>
       </div>
       <div class='conten_izquierdo'>
-        <img src='#' alt='logo proyecto'>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+        <h2>Únete a nuestra comunidad</h2>
+        <p>Forma parte de una red que valora y preserva la cultura ancestral Zenú. Cada compra apoya directamente a nuestros artesanos.</p>
       </div>
     </div>`;
+    
     const olvidoForm = `
     <div class='conten_gen'>
       <div class='tex'>
         <h3>Recuperar contraseña</h3>
-        <p>Escribe tu correo</p>
-        <input type='email' placeholder='Ingresa tu email'>
-        <button type='button' class='btn_ingresar'>Enviar</button>
+        <p>Escribe tu correo para recuperar tu contraseña</p>
+        <input type='email' placeholder='Ingresa tu email' id='olvido-email'>
+        <button type='button' class='btn_ingresar' onclick='recuperarContraseña()'>Enviar</button>
+        <p>
+          <a href='#' id='modal-login-link-olvido'>¿Recordaste tu contraseña? Inicia sesión</a>
+        </p>
       </div>
       <div class='conten_izquierdo'>
-        <img src='#' alt='logo proyecto'>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis numquam illo aperiam sit, ut excepturi doloribus beatae, eius error aliquam perferendis quo. Aliquam eaque vel error optio expedita. Quidem, quibusdam?</p>
+        <h2>No te preocupes</h2>
+        <p>Te ayudamos a recuperar el acceso a tu cuenta para que puedas seguir disfrutando de nuestras artesanías.</p>
       </div>
     </div>`;
     const modalBg = document.getElementById('modal-bg');
@@ -177,10 +226,20 @@
       modalBg.classList.add('active');
       setTimeout(() => {
         document.getElementById('modal-close').onclick = closeModal;
+        
+        // Enlaces del modal de login
         const reg = document.getElementById('modal-registro-link');
         if(reg) reg.onclick = (e) => { e.preventDefault(); openModal(registroForm); };
         const olv = document.getElementById('modal-olvido-link');
         if(olv) olv.onclick = (e) => { e.preventDefault(); openModal(olvidoForm); };
+        
+        // Enlaces del modal de registro
+        const loginFromReg = document.getElementById('modal-login-link');
+        if(loginFromReg) loginFromReg.onclick = (e) => { e.preventDefault(); openModal(loginForm); };
+        
+        // Enlaces del modal de olvido
+        const loginFromOlv = document.getElementById('modal-login-link-olvido');
+        if(loginFromOlv) loginFromOlv.onclick = (e) => { e.preventDefault(); openModal(loginForm); };
       }, 10);
     }
     function closeModal() {
@@ -193,24 +252,315 @@
       if(e.target === modalBg) closeModal();
     };
     modalClose.onclick = closeModal;
-    // CARRITO (funcionalidad básica)
-    let carrito = [];
-    function agregarCarrito(producto) {
-        carrito.push(producto);
-        document.getElementById('carrito-badge').textContent = carrito.length;
-        alert('Producto agregado: ' + producto);
-    }
-    document.getElementById('btn-carrito').onclick = function() {
-        if(carrito.length === 0) {
-            alert('No tienes productos en tu carrito');
-        } else {
-            alert('Productos en tu carrito:\n' + carrito.join('\n'));
+    // CARRITO DESLIZABLE (funcionalidad avanzada)
+    let carrito = JSON.parse(localStorage.getItem('carritoArtesanias')) || [];
+    let productos = [
+        { 
+            id: 1, 
+            nombre: 'Canasto Pequeño', 
+            precio: 35000, 
+            imagen: './Canasto Pequeño.jpg',
+            icono: '🧺',
+            descripcion: 'Canasto tradicional Zenú elaborado en caña flecha'
+        },
+        { 
+            id: 2, 
+            nombre: 'Mochila Escolar', 
+            precio: 95000, 
+            imagen: './Mochila Escolar.jpg',
+            icono: '🎒',
+            descripcion: 'Mochila escolar tradicional con diseño resistente'
+        },
+        { 
+            id: 3, 
+            nombre: 'Sombrero Vueltiao', 
+            precio: 85000, 
+            imagen: './Sombrero Vueltiao.jpg',
+            icono: '👒',
+            descripcion: 'Sombrero vueltiao tradicional de la cultura Zenú'
+        },
+        { 
+            id: 4, 
+            nombre: 'Pulsera Tradicional', 
+            precio: 45000, 
+            imagen: './Pulsera Tradicional.jpg',
+            icono: '💎',
+            descripcion: 'Pulsera tradicional elaborada en caña flecha'
         }
-    };
-    // Notificaciones (simulado)
-    document.getElementById('btn-notificaciones').onclick = function() {
-        alert('No tienes notificaciones nuevas.');
-    };
+    ];
+
+    // Elementos del carrito
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartSlide = document.getElementById('cart-slide');
+    const cartContent = document.getElementById('cart-content');
+    const cartTotal = document.getElementById('cart-total');
+    const btnComprar = document.getElementById('btn-comprar');
+    const btnContinuar = document.getElementById('btn-continuar');
+
+    // Cargar carrito al iniciar la página
+    cargarCarrito();
+
+    function agregarCarrito(nombreProducto) {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        
+        if (!usuarioLogueado) {
+            openModal(loginForm);
+            return;
+        }
+
+        // Buscar el producto en la lista
+        const producto = productos.find(p => p.nombre === nombreProducto);
+        if (!producto) return;
+
+        // Verificar si ya existe en el carrito
+        const itemExistente = carrito.find(item => item.id === producto.id);
+        
+        if (itemExistente) {
+            itemExistente.cantidad += 1;
+        } else {
+            carrito.push({
+                ...producto,
+                cantidad: 1
+            });
+        }
+
+        actualizarCarritoCompleto();
+        guardarCarrito();
+        mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+    }
+
+    function actualizarCarrito() {
+        // Actualizar badge
+        const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+        document.getElementById('carrito-badge').textContent = totalItems;
+
+        // Actualizar contenido del carrito
+        if (carrito.length === 0) {
+            cartContent.innerHTML = `
+                <div class="cart-empty">
+                    <div class="cart-empty-icon">🛒</div>
+                    <h4>Tu carrito está vacío</h4>
+                    <p>Descubre nuestras hermosas artesanías Zenú y agrega algunos productos para comenzar tu compra</p>
+                    <button class="btn-explorar" onclick="cerrarCarrito()">Explorar Productos</button>
+                </div>
+            `;
+            btnComprar.disabled = true;
+            cartTotal.textContent = '$0';
+            document.getElementById('cart-summary').style.display = 'none';
+        } else {
+            cartContent.innerHTML = carrito.map(item => {
+                const subtotal = item.precio * item.cantidad;
+                return `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image">
+                            <img src="${item.imagen}" alt="${item.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div class="fallback-icon" style="display: none;">${item.icono}</div>
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.nombre}</div>
+                            <div class="cart-item-description">${item.descripcion}</div>
+                            <div class="cart-item-price-container">
+                                <div class="cart-item-price">$${item.precio.toLocaleString()}</div>
+                                <div class="cart-item-subtotal">Subtotal: $${subtotal.toLocaleString()}</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <span class="quantity-label">Cantidad:</span>
+                                <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                                <span class="quantity-display">${item.cantidad}</span>
+                                <button class="quantity-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="eliminarItem(${item.id})" title="Eliminar del carrito">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+
+            // Calcular totales
+            const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000; // Envío gratis sobre $100k
+            const total = subtotal + shipping;
+
+            // Actualizar resumen
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+            document.getElementById('cart-shipping').textContent = shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString()}`;
+            document.getElementById('cart-total-summary').textContent = `$${total.toLocaleString()}`;
+            document.getElementById('cart-total').textContent = `$${total.toLocaleString()}`;
+            
+            // Mostrar resumen
+            document.getElementById('cart-summary').style.display = 'block';
+            btnComprar.disabled = false;
+        }
+    }
+
+    function cambiarCantidad(id, cambio) {
+        const item = carrito.find(item => item.id === id);
+        if (!item) return;
+
+        item.cantidad += cambio;
+        
+        if (item.cantidad <= 0) {
+            eliminarItem(id);
+        } else {
+            actualizarCarritoCompleto();
+            guardarCarrito();
+        }
+    }
+
+    function eliminarItem(id) {
+        carrito = carrito.filter(item => item.id !== id);
+        actualizarCarritoCompleto();
+        guardarCarrito();
+    }
+
+    function abrirCarrito() {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        
+        if (!usuarioLogueado) {
+            openModal(loginForm);
+            return;
+        }
+
+        cartOverlay.classList.add('active');
+        cartSlide.classList.add('active');
+        actualizarCarrito();
+    }
+
+    function cerrarCarrito() {
+        cartOverlay.classList.remove('active');
+        cartSlide.classList.remove('active');
+    }
+
+    function comprar() {
+        if (carrito.length === 0) return;
+
+        const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        const shipping = subtotal > 100000 ? 0 : 15000;
+        const total = subtotal + shipping;
+        
+        const resumen = carrito.map(item => 
+            `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}`
+        ).join('\n');
+
+        const confirmacion = `¿Confirmar compra?\n\n${resumen}\n\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'Gratis' : '$' + shipping.toLocaleString()}\n\nTOTAL: $${total.toLocaleString()}`;
+
+        if (confirm(confirmacion)) {
+            alert('¡Compra realizada con éxito! Te contactaremos pronto para coordinar la entrega.');
+            carrito = [];
+            actualizarCarritoCompleto();
+            guardarCarrito();
+            cerrarCarrito();
+        }
+    }
+
+    function mostrarNotificacion(mensaje) {
+        // Crear notificación temporal
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--naranja);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        `;
+        notification.textContent = mensaje;
+        document.body.appendChild(notification);
+
+        // Animar entrada
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Event listeners del carrito
+    document.getElementById('btn-carrito').onclick = abrirCarrito;
+    document.getElementById('cart-close').onclick = cerrarCarrito;
+    document.getElementById('btn-comprar').onclick = comprar;
+    document.getElementById('btn-continuar').onclick = cerrarCarrito;
+    cartOverlay.onclick = cerrarCarrito;
+    
+    // FUNCIONES DE AUTENTICACIÓN
+    function iniciarSesion() {
+        const usuario = document.getElementById('login-usuario').value;
+        const contraseña = document.getElementById('login-contraseña').value;
+        
+        if (!usuario || !contraseña) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+        
+        // Simulación de login (aquí iría la lógica real de autenticación)
+        if (usuario === 'admin' && contraseña === 'admin') {
+            // Guardar estado de login en localStorage
+            localStorage.setItem('usuarioLogueado', 'true');
+            localStorage.setItem('usuario', usuario);
+            alert('¡Bienvenido! Redirigiendo al dashboard...');
+            closeModal();
+            window.location.href = './dashboard/usuario.html';
+        } else {
+            alert('Usuario o contraseña incorrectos');
+        }
+    }
+    
+    function registrarUsuario() {
+        const usuario = document.getElementById('reg-usuario').value;
+        const contraseña = document.getElementById('reg-contraseña').value;
+        const email = document.getElementById('reg-email').value;
+        const telefono = document.getElementById('reg-telefono').value;
+        
+        if (!usuario || !contraseña || !email || !telefono) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+        
+        // Validación básica de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor ingresa un email válido');
+            return;
+        }
+        
+        // Simulación de registro (aquí iría la lógica real de registro)
+        // Guardar estado de login en localStorage
+        localStorage.setItem('usuarioLogueado', 'true');
+        localStorage.setItem('usuario', usuario);
+        alert('¡Registro exitoso! Ya estás logueado');
+        closeModal();
+    }
+    
+    function recuperarContraseña() {
+        const email = document.getElementById('olvido-email').value;
+        
+        if (!email) {
+            alert('Por favor ingresa tu email');
+            return;
+        }
+        
+        // Validación básica de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Por favor ingresa un email válido');
+            return;
+        }
+        
+        // Simulación de recuperación (aquí iría la lógica real de recuperación)
+        alert('Se ha enviado un enlace de recuperación a tu email');
+        openModal(loginForm);
+    }
     </script>
 </body>
 </html>

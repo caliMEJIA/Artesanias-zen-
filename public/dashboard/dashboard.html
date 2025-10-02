@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Artesanías Zenú</title>
+    <style>
+        :root {
+            --marron: #804727;
+            --naranja: #c76227;
+            --naranja-oscuro: #864b13;
+            --verde: #24765d;
+            --gris-fondo: #f8f8f8;
+            --blanco: #fff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--gris-fondo);
+            color: #333;
+        }
+        .header {
+            background: var(--marron);
+            color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: var(--marron);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            background: var(--naranja);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: var(--naranja-oscuro);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--blanco);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--naranja);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .back-btn {
+            background: var(--verde);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #1e5a47;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Dashboard - Artesanías Zenú</h1>
+        <p>Panel de administración de la tienda virtual</p>
+    </div>
+    
+        <div class="container">
+            <a href="../index.html" class="back-btn">← Volver al inicio</a>
+            <a href="usuario.html" class="back-btn" style="margin-left: 1rem; background: var(--naranja);">👤 Dashboard Usuario</a>
+            <a href="admin.html" class="back-btn" style="margin-left: 1rem; background: var(--verde);">⚙️ Dashboard Admin</a>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Productos en venta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">89</div>
+                <div class="stat-label">Pedidos este mes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Artesanos activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.8</div>
+                <div class="stat-label">Calificación promedio</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$12.5M</div>
+                <div class="stat-label">Ventas este mes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">342</div>
+                <div class="stat-label">Usuarios registrados</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>📦 Gestión de Productos</h3>
+                <p>Administra el catálogo de artesanías, añade nuevos productos, actualiza precios y gestiona el inventario.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Productos activos:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">156</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Stock bajo:</span>
+                        <span style="color: #e74c3c; font-weight: bold;">8</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Nuevos este mes:</span>
+                        <span style="color: var(--verde); font-weight: bold;">12</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Gestionar Productos</a>
+            </div>
+            
+            <div class="card">
+                <h3>🛒 Pedidos y Ventas</h3>
+                <p>Revisa y procesa pedidos, gestiona el estado de envíos y realiza seguimiento de las ventas.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Pendientes:</span>
+                        <span style="color: #f39c12; font-weight: bold;">15</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>En proceso:</span>
+                        <span style="color: #3498db; font-weight: bold;">23</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Entregados:</span>
+                        <span style="color: var(--verde); font-weight: bold;">51</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Ver Pedidos</a>
+            </div>
+            
+            <div class="card">
+                <h3>👥 Gestión de Artesanos</h3>
+                <p>Administra la información de los artesanos, sus productos y comisiones.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Artesanos activos:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">24</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Pendientes aprobación:</span>
+                        <span style="color: #e74c3c; font-weight: bold;">3</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Comisiones pagadas:</span>
+                        <span style="color: var(--verde); font-weight: bold;">$2.1M</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Gestionar Artesanos</a>
+            </div>
+            
+            <div class="card">
+                <h3>📊 Reportes y Estadísticas</h3>
+                <p>Visualiza reportes de ventas, análisis de productos más vendidos y estadísticas del negocio.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Ventas hoy:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">$450K</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Conversión:</span>
+                        <span style="color: var(--verde); font-weight: bold;">3.2%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Ticket promedio:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">$85K</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Ver Reportes</a>
+            </div>
+            
+            <div class="card">
+                <h3>⚙️ Configuración</h3>
+                <p>Configura parámetros del sistema, métodos de pago, envíos y configuraciones generales.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Métodos de pago:</span>
+                        <span style="color: var(--verde); font-weight: bold;">4</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Zonas de envío:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">32</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Configuraciones:</span>
+                        <span style="color: var(--verde); font-weight: bold;">12</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Configurar</a>
+            </div>
+            
+            <div class="card">
+                <h3>🎧 Soporte al Cliente</h3>
+                <p>Gestiona consultas, reclamos y brinda soporte a los clientes de la tienda.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Tickets abiertos:</span>
+                        <span style="color: #e74c3c; font-weight: bold;">7</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Resueltos hoy:</span>
+                        <span style="color: var(--verde); font-weight: bold;">12</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Tiempo promedio:</span>
+                        <span style="color: var(--naranja); font-weight: bold;">2.3h</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Ver Consultas</a>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN DE ACTIVIDAD RECIENTE -->
+        <div style="margin-top: 2rem;">
+            <h2 style="color: var(--marron); margin-bottom: 1.5rem; font-size: 1.8rem;">Actividad Reciente</h2>
+            <div style="background: var(--blanco); border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--gris-fondo); border-radius: 8px;">
+                        <div style="font-size: 1.5rem;">🛒</div>
+                        <div>
+                            <div style="font-weight: bold; color: var(--marron);">Nuevo pedido #001236</div>
+                            <div style="color: var(--texto-gris); font-size: 0.9rem;">Cliente: María González • Total: $125.000 • Hace 5 minutos</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--gris-fondo); border-radius: 8px;">
+                        <div style="font-size: 1.5rem;">👥</div>
+                        <div>
+                            <div style="font-weight: bold; color: var(--marron);">Nuevo artesano registrado</div>
+                            <div style="color: var(--texto-gris); font-size: 0.9rem;">Carlos Mendoza • Especialidad: Canastos • Hace 1 hora</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--gris-fondo); border-radius: 8px;">
+                        <div style="font-size: 1.5rem;">⭐</div>
+                        <div>
+                            <div style="font-weight: bold; color: var(--marron);">Nueva reseña 5 estrellas</div>
+                            <div style="color: var(--texto-gris); font-size: 0.9rem;">Producto: Mochila Escolar • Cliente: Ana Rodríguez • Hace 2 horas</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--gris-fondo); border-radius: 8px;">
+                        <div style="font-size: 1.5rem;">📦</div>
+                        <div>
+                            <div style="font-weight: bold; color: var(--marron);">Producto agotado</div>
+                            <div style="color: var(--texto-gris); font-size: 0.9rem;">Canasto Zenú Pequeño • Stock: 0 • Hace 3 horas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
